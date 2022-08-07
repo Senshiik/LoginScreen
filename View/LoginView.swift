@@ -10,7 +10,8 @@ import SwiftUI
 struct LoginView: View {
     
     @StateObject public var model:LoginModel
-    @State var textField: String = ""
+    @State var textField1: String = ""
+    @State var textField2: String = ""
     
     var body: some View {
         VStack {
@@ -44,8 +45,7 @@ struct LoginView_Previews: PreviewProvider {
 
 extension LoginView {
     private var loginField: some View {
-        TextField("Type your email here...", text: $textField)
-            .foregroundColor(.blue)
+        TextField("Type your email here...", text: $textField1)
             .padding()
             .frame(height:55)
             .background(Color("silver"))
@@ -54,7 +54,7 @@ extension LoginView {
     }
     
     private var passwordField: some View {
-        TextField("Type your password here...", text: $textField)
+        TextField("Type your password here...", text: $textField2)
             .padding()
             .font(.title2)
             .frame(height:55)
