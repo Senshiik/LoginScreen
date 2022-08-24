@@ -20,6 +20,7 @@
 		62837720289C586C0088F226 /* LoginScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6283771F289C586C0088F226 /* LoginScreenUITests.swift */; };
 		62837722289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62837721289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift */; };
 		6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6283772E289C5B570088F226 /* PrimaryButton.swift */; };
+		62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */; };
 		62E5D16828AA5863006C1DD4 /* SafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E5D16728AA5863006C1DD4 /* SafariViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		6283771F289C586C0088F226 /* LoginScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITests.swift; sourceTree = "<group>"; };
 		62837721289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6283772E289C5B570088F226 /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		62E5D16728AA5863006C1DD4 /* SafariViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 		628376F8289C58690088F226 = {
 			isa = PBXGroup;
 			children = (
+				62B8974E28B68A5D00F0E6D4 /* Managers */,
 				620E9725289ED9DE005D812E /* ViewModel */,
 				62837732289C5C2C0088F226 /* View */,
 				62837703289C58690088F226 /* LoginScreen */,
@@ -162,6 +165,14 @@
 				62525ED128B521EE002AA769 /* AlertView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		62B8974E28B68A5D00F0E6D4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +310,7 @@
 				62525ED228B521EE002AA769 /* AlertView.swift in Sources */,
 				6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */,
 				62837707289C58690088F226 /* ContentView.swift in Sources */,
+				62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */,
 				620E9724289DA409005D812E /* LoginView.swift in Sources */,
 				62837705289C58690088F226 /* LoginScreenApp.swift in Sources */,
 				62E5D16828AA5863006C1DD4 /* SafariViewController.swift in Sources */,

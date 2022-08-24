@@ -10,7 +10,6 @@ import SwiftUI
 struct LoginView: View {
     
     @StateObject public var model: LoginModel
-    var k: Int = 0
     
     var body: some View {
             VStack {
@@ -18,15 +17,34 @@ struct LoginView: View {
                 loginLabel
                 loginField
                 passLabel
-                passwordField
-                if model.isShowingError {
-                    Text("Your email or password is wrong!")
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                passwordField.alert("Forgot password?", isPresented: $model.isAlertPresented) {
+                    Button("Try again", role: .cancel) {}
+                    Button("reset the password") {
+                        model.toggleSheet()
+                    }
+                }
+                if model.isButtonDisabled {
+                    Text(model.errorMessageText)
+                        .padding(16)
                         .foregroundColor(Color("salmon"))
                     
                 }
+                if model.isShowingError {
+                    Text("Incorrect email format")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("salmon"))
+                        .opacity( model.isEmailValid ? 0.0 : 1)
+                        .padding()
+                    Text("Incorrect password format!There must be at least: one digit, one upper letter one lower letter, length 8 or more")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("salmon"))
+                        .opacity( model.isPassValid ? 0.0 : 1)
+                        .padding()
+                    
+                }
                 Spacer()
-                logInButton
+                logInButton.disabled(model.isButtonDisabled)
+                    .opacity(model.isButtonDisabled ? 0.5 : 1.0)
                 forgotPassButton
             }
         .padding()
@@ -40,9 +58,9 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             LoginView(model: LoginModel())
-
+                .preferredColorScheme(.dark)
         }
-        .preferredColorScheme(.dark)
+
     }
 }
 
