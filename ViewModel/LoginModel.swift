@@ -9,14 +9,18 @@ import Foundation
 import SwiftUI
 
 class LoginModel: ObservableObject {
+    @Published var isRegistrationMode: Bool = false
     @Published var isPressed: Bool = false
     @Published var isAlertPresented: Bool = false
     @Published var isValid: Bool = false
     @Published var isEmailValid: Bool = true
     @Published var isPassValid: Bool = true
+    @Published var isPassEquals: Bool = true
     @Published var isButtonDisabled: Bool = false
     @Published var textField1: String = ""
     @Published var textField2: String = ""
+    @Published var textField3: String = ""
+    @Published var textField4: String = ""
     @Published public var isShowingError: Bool = false
     @Published var fails: Int = 0
     @Published var timeRemaining = 0
@@ -41,9 +45,34 @@ class LoginModel: ObservableObject {
         isShowingError = true
         }
     }
-    
+    func register1() {
+        if  isValidName()  && isValidEmail() && isValidPass() && textField4 == textField2{
+            isRegistrationMode.toggle()
+            isShowingError = false
+        }
+        if !isValidEmail(){
+        isEmailValid = false
+        isShowingError = true
+        }
+        if !isValidEmail(){
+        isEmailValid = false
+        isShowingError = true
+        }
+        if !isValidPass(){
+        isPassValid = false
+        isShowingError = true
+        }
+        if textField2 != textField4 {
+            isPassEquals = false
+        }
+    }
+
     func toggleSheet() {
         isPressed.toggle()
+    }
+    
+    func toggleRegistrationMode() {
+        isRegistrationMode.toggle()
     }
     
     func isValidEmail() -> Bool {
@@ -52,11 +81,18 @@ class LoginModel: ObservableObject {
         return regexEmail.firstMatch(in: textField1, options: [], range: range) != nil
     }
     
+    func isValidName() -> Bool {
+        let regexEmail = try! NSRegularExpression(pattern: #"^[A-z0-9]+$"#)
+        let range = NSRange(location: 0, length: textField3.count)
+        return regexEmail.firstMatch(in: textField3, options: [], range: range) != nil
+    }
+    
     func isValidPass() -> Bool {
         let regexEmail = try! NSRegularExpression(pattern: #"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"#)
         let range1 = NSRange(location: 0, length: textField2.count)
         return regexEmail.firstMatch(in: textField2, options: [], range: range1 ) != nil
     }
+    
     @objc func timerTick() {
         if timeRemaining > 0 {
             errorMessageText = "Your email or password is wrong. Try again in \(timeRemaining)"
