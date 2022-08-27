@@ -15,8 +15,10 @@ struct LoginView: View {
         VStack(spacing:16) {
                 Spacer()
                 Group {
+                    if model.isRegistrationMode {
                 nameLabel
                 nameField
+                    }
                 loginLabel
                 loginField
                 }
@@ -28,7 +30,9 @@ struct LoginView: View {
                         model.toggleSheet()
                         }
                     }
+                if model.isRegistrationMode {
                 secondPasswordField
+                }
                 }
                 Group {
                 if model.isButtonDisabled {
@@ -41,27 +45,27 @@ struct LoginView: View {
                     Text("Incorrect email format")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(Color("salmon"))
-                        .opacity( model.isEmailValid ? 0.0 : 1)
                     Text("Incorrect password format!There must be at least: one digit, one upper letter one lower letter, length 8 or more")
-                        .frame(alignment: .leading)
+                        .frame(maxWidth: .infinity,alignment: .leading)
                         .foregroundColor(Color("salmon"))
-                        .opacity( model.isPassValid ? 0.0 : 1)
-                        .padding()}
+                    }
                 }
             Group {
+                if model.isRegistrationMode {
             registerButton
             goToLogin
+                }
             }
             Spacer()
+            if !model.isRegistrationMode {
                 logInButton.disabled(model.isButtonDisabled)
-                    .opacity(model.isButtonDisabled ? 0.5 : 1.0)
                 forgotPassButton
-            registrationButton
-                .opacity(model.isRegistrationMode ? 0.0 : 1.0)
-            Group{
-            Spacer()
-            Spacer()
             }
+            if !model.isRegistrationMode {
+            registrationButton
+            }
+            Spacer()
+            
         }.padding()
         .background(Color.background.ignoresSafeArea())
         
@@ -166,7 +170,6 @@ extension LoginView {
             .frame(height:55)
             .background(Color("silver"))
             .cornerRadius(10)
-            .opacity(model.isRegistrationMode ? 1.0 : 0.0)
             .overlay(alignment: .trailing, content: {
                 Button(action: {
                     self.model.textField4 = ""})
@@ -193,15 +196,13 @@ extension LoginView {
                       style: .primary,
                       filled: false,
                       action: model.toggleRegistrationMode)
-        .lineLimit(2)
         }
     
     private var registerButton: some View {
         PrimaryButton(text: "Register",
                       style: .primary,
-                      filled: false,
                       action: model.register1)
-        .opacity(model.isRegistrationMode ? 1.0 : 0.0)
+        
     }
     
     private var goToLogin: some View {
@@ -209,8 +210,6 @@ extension LoginView {
                       style: .primary,
                       filled: false,
                       action: model.toggleRegistrationMode)
-        .opacity(model.isRegistrationMode ? 1.0 : 0.0)
-        
     }
     
     private var forgotPassButton: some View {
@@ -218,7 +217,6 @@ extension LoginView {
                       style: .danger,
                       filled: false,
                       action: model.toggleSheet)
-        .opacity(model.isRegistrationMode ? 0.0 : 1.0)
         .sheet(isPresented: $model.isPressed) {
             SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
         }

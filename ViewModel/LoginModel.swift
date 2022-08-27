@@ -73,6 +73,11 @@ class LoginModel: ObservableObject {
     
     func toggleRegistrationMode() {
         isRegistrationMode.toggle()
+        isShowingError = false
+        textField1 = ""
+        textField2 = ""
+        textField3 = ""
+        textField4 = ""
     }
     
     func isValidEmail() -> Bool {
