@@ -44,7 +44,7 @@ struct PrimaryButton: View {
         Text(text)
             .font(.title2)
             .fontWeight(filled ? .semibold : .regular)
-            //.minimumScaleFactor(0.5)
+            .minimumScaleFactor(0.5)
             .lineLimit(1)
             .foregroundColor(filled ? .white : color)
             .padding()

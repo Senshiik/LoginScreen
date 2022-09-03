@@ -8,18 +8,6 @@
 import SwiftUI
 import SafariServices
 
-struct SafariViewController: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct SafariViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        SafariViewController()
-    }
-}
-
 struct SafariView: UIViewControllerRepresentable {
 
     let url: URL

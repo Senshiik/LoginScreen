@@ -12,76 +12,52 @@ struct LoginView: View {
     @StateObject public var model: LoginModel
     
     var body: some View {
-        VStack(spacing:16) {
-                Spacer()
-                Group {
-                    if model.isRegistrationMode {
-                nameLabel
-                nameField
-                    }
-                loginLabel
-                loginField
-                }
-            Group{
-                passLabel
-                passwordField.alert("Forgot password?", isPresented: $model.isAlertPresented) {
-                    Button("Try again", role: .cancel) {}
-                    Button("reset the password") {
-                        model.toggleSheet()
-                        }
-                    }
-                if model.isRegistrationMode {
-                secondPasswordField
-                }
-                }
-                Group {
-                if model.isButtonDisabled {
-                    Text(model.errorMessageText)
-                        .padding(16)
-                        .foregroundColor(Color("salmon"))
-                    
-                }
-                if model.isShowingError {
-                    Text("Incorrect email format")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(Color("salmon"))
-                    Text("Incorrect password format!There must be at least: one digit, one upper letter one lower letter, length 8 or more")
-                        .frame(maxWidth: .infinity,alignment: .leading)
-                        .foregroundColor(Color("salmon"))
-                    }
-                }
+        VStack(spacing: 16) {
+            Spacer()
             Group {
                 if model.isRegistrationMode {
-            registerButton
-            goToLogin
+                    nameLabel
+                    nameField
+                }
+                loginField
+            }
+            Group {
+                passLabel
+                passwordField
+                if model.isRegistrationMode {
+                    secondPasswordField
+                }
+            }
+            Text(model.errorMessageText)
+                .padding(16)
+                .foregroundColor(.salmon)
+            Group {
+                if model.isRegistrationMode {
+                    registerButton
+                    goToLogin
                 }
             }
             Spacer()
             if !model.isRegistrationMode {
-                logInButton.disabled(model.isButtonDisabled)
+                logInButton
+                    .disabled(model.isButtonDisabled)
                 forgotPassButton
+                registrationButton
             }
-            if !model.isRegistrationMode {
-            registrationButton
-            }
-            Spacer()
-            
-        }.padding()
-        .background(Color.background.ignoresSafeArea())
-        
-            
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            LoginView(model: LoginModel())
-                .preferredColorScheme(.dark)
         }
-
+        .padding()
+        //.background(Color.background.ignoresSafeArea())
+        .sheet(isPresented: $model.isShowingSheet) {
+            SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
+        }
+        .alert("Forgot password?", isPresented: $model.isAlertPresented) {
+            Button("Try again", role: .cancel) {}
+            Button("reset the password", action: model.toggleSheet)
+        }
     }
 }
+
+// MARK: - Subviews
 
 extension LoginView {
     
@@ -109,12 +85,13 @@ extension LoginView {
             .opacity(model.isRegistrationMode ? 1.0 : 0.0)
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.textField3 = ""})
-                       {
-                    Image(systemName: "delete.left")                               .opacity(model.isRegistrationMode ? 1.0 : 0.0)
-                               .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .padding()
+                    self.model.textField3 = ""
+                }){
+                    Image(systemName: "delete.left")
+                        .opacity(model.isRegistrationMode ? 1.0 : 0.0)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding()
             })
     }
     private var loginLabel: some View {
@@ -122,8 +99,10 @@ extension LoginView {
             .font(.subheadline)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
+    @ViewBuilder
     private var loginField: some View {
+        loginLabel
         TextField("Type your email here", text: $model.textField1)
             .disableAutocorrection(true)
             .textInputAutocapitalization(.never)
@@ -135,11 +114,11 @@ extension LoginView {
             .overlay(alignment: .trailing, content: {
                 Button(action: {
                     self.model.textField1 = ""})
-                       {
+                {
                     Image(systemName: "delete.left")
-                               .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .padding()
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding()
             })
     }
     
@@ -154,11 +133,11 @@ extension LoginView {
             .overlay(alignment: .trailing, content: {
                 Button(action: {
                     self.model.textField2 = ""})
-                       {
+                {
                     Image(systemName: "delete.left")
-                               .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .padding()
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding()
             })
     }
     
@@ -173,36 +152,34 @@ extension LoginView {
             .overlay(alignment: .trailing, content: {
                 Button(action: {
                     self.model.textField4 = ""})
-                       {
+                {
                     Image(systemName: "delete.left")
-                               .opacity(model.isRegistrationMode ? 1.0 : 0.0)
-                               .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .padding()
+                        .opacity(model.isRegistrationMode ? 1.0 : 0.0)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding()
             })
     }
-    
+
+    // TODO: primary button
     private var logInButton: some View {
         PrimaryButton(text: "Log in",
                       style: .primary,
                       action: model.logIn)
-        .opacity(model.isRegistrationMode ? 0.0 : 1.0)
-        .sheet(isPresented: $model.isValid) {
-            Text("You entered your account")
-        }
     }
+    
+    private var registerButton: some View {
+        PrimaryButton(text: "Register",
+                      style: .primary,
+                      action: model.register)
+    }
+
+    // TODO: secondary button
     private var registrationButton: some View {
         PrimaryButton(text: "Don`t have an account yet?",
                       style: .primary,
                       filled: false,
                       action: model.toggleRegistrationMode)
-        }
-    
-    private var registerButton: some View {
-        PrimaryButton(text: "Register",
-                      style: .primary,
-                      action: model.register1)
-        
     }
     
     private var goToLogin: some View {
@@ -217,8 +194,17 @@ extension LoginView {
                       style: .danger,
                       filled: false,
                       action: model.toggleSheet)
-        .sheet(isPresented: $model.isPressed) {
-            SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
+    }
+}
+
+// MARK: - Previews
+
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView{
+            LoginView(model: LoginModel())
+                .preferredColorScheme(.dark)
         }
+
     }
 }
