@@ -16,13 +16,11 @@ struct LoginView: View {
             Spacer()
             Group {
                 if model.isRegistrationMode {
-                    nameLabel
                     nameField
                 }
                 loginField
             }
             Group {
-                passLabel
                 passwordField
                 if model.isRegistrationMode {
                     secondPasswordField
@@ -46,7 +44,7 @@ struct LoginView: View {
             }
         }
         .padding()
-        //.background(Color.background.ignoresSafeArea())
+        .ignoresSafeArea()
         .sheet(isPresented: $model.isShowingSheet) {
             SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
         }
@@ -73,48 +71,23 @@ extension LoginView {
             .font(.subheadline)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-    private var nameField: some View {
-        TextField("Type your name here", text: $model.textField3)
-            .disableAutocorrection(true)
-            .textInputAutocapitalization(.never)
-            .padding()
-            .frame(height:55)
-            .background(Color("silver"))
-            .font(.title2)
-            .cornerRadius(10)
-            .opacity(model.isRegistrationMode ? 1.0 : 0.0)
-            .overlay(alignment: .trailing, content: {
-                Button(action: {
-                    self.model.textField3 = ""
-                }){
-                    Image(systemName: "delete.left")
-                        .opacity(model.isRegistrationMode ? 1.0 : 0.0)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                .padding()
-            })
-    }
+    
     private var loginLabel: some View {
         Text(model.isRegistrationMode ? "Email" : "Login")
             .font(.subheadline)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-
+    
     @ViewBuilder
-    private var loginField: some View {
-        loginLabel
-        TextField("Type your email here", text: $model.textField1)
-            .disableAutocorrection(true)
-            .textInputAutocapitalization(.never)
-            .padding()
-            .frame(height:55)
-            .background(Color("silver"))
-            .font(.title2)
-            .cornerRadius(10)
+    private var nameField: some View {
+        nameLabel
+        PrimaryTextField(isSecure: false,
+                         text: $model.name,
+                         title: "Type your name here")
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.textField1 = ""})
-                {
+                    self.model.name = ""
+                }){
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -122,17 +95,34 @@ extension LoginView {
             })
     }
     
-    private var passwordField: some View {
-        SecureField("Type your password here", text: $model.textField2)
-            .disableAutocorrection(true)
-            .padding()
-            .font(.title2)
-            .frame(height:55)
-            .background(Color("silver"))
-            .cornerRadius(10)
+
+    @ViewBuilder
+    private var loginField: some View {
+        loginLabel
+        PrimaryTextField(isSecure: false,
+                         text: $model.email,
+                         title: "Type your email here...")
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.textField2 = ""})
+                    self.model.email = ""})
+                {
+                    Image(systemName: "delete.left")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding()
+            })
+    }
+    @ViewBuilder
+    private var passwordField: some View {
+        passLabel
+        PrimaryTextField(
+            isSecure: true,
+            text: $model.password,
+            title: "Type your password here..."
+                        )
+            .overlay(alignment: .trailing, content: {
+                Button(action: {
+                    self.model.password = ""})
                 {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -142,7 +132,11 @@ extension LoginView {
     }
     
     private var secondPasswordField: some View {
-        SecureField("Type your password again", text: $model.textField4)
+        PrimaryTextField(
+            isSecure: true,
+            text: $model.passwordCheck,
+            title: "Type your password again"
+                        )
             .disableAutocorrection(true)
             .padding()
             .font(.title2)
@@ -151,10 +145,9 @@ extension LoginView {
             .cornerRadius(10)
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.textField4 = ""})
+                    self.model.passwordCheck = ""})
                 {
                     Image(systemName: "delete.left")
-                        .opacity(model.isRegistrationMode ? 1.0 : 0.0)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding()

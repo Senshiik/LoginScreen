@@ -15,10 +15,10 @@ class LoginModel: ObservableObject {
     @Published public var isAlertPresented: Bool = false
 
     @Published public var isButtonDisabled: Bool = false
-    @Published public var textField1: String = "" // TODO: normal name
-    @Published public var textField2: String = ""
-    @Published public var textField3: String = ""
-    @Published public var textField4: String = ""
+    @Published public var email: String = "" // TODO: normal name. DONE
+    @Published public var password: String = ""
+    @Published public var name: String = ""
+    @Published public var passwordCheck: String = ""
 
     @Published public var errorMessageText: String = ""
     var validator = FieldValidator()
@@ -33,20 +33,20 @@ class LoginModel: ObservableObject {
         var isAllValid = true
         let validator = FieldValidator()
 
-        if !validator.isValidEmail(email: textField1){
-            // TODO: errorMessageText
+        if !validator.isValidEmail(email: email){
         errorMessageText = "Incorrect email"
             isAllValid = false
+            return
         }
-        if !validator.isValidPass(email: textField2){
-            // TODO: errorMessageText
+        if !validator.isValidPass(password: password){
             errorMessageText = "Incorrect password"
             isAllValid = false
+            return
         }
-        if !validator.isValidName(email: textField3){
-            // TODO: errorMessageText
+        if !validator.isValidName(name: name){
         errorMessageText = "Incorrect name"
             isAllValid = false
+            return
         }
         if isAllValid {
             errorMessageText = ""
@@ -59,19 +59,19 @@ class LoginModel: ObservableObject {
     }
 
     func register() {
-        if  validator.isValidName(email: textField3)  && validator.isValidEmail(email: textField1) && validator.isValidPass(email: textField2) && textField4 == textField2{
+        if  validator.isValidName(name: name)  && validator.isValidEmail(email: email) && validator.isValidPass(password: password) && passwordCheck == password{
             isRegistrationMode.toggle()
             errorMessageText = ""
         }
-        if !validator.isValidEmail(email: textField1){
+        if !validator.isValidEmail(email: email){
             isEmailValid = false
             errorMessageText = "Incorrect email"
         }
-        if !validator.isValidPass(email: textField2){
+        if !validator.isValidPass(password: password){
             isPassValid = false
             errorMessageText = "Incorrect password"
         }
-        if textField2 != textField4 {
+        if password != passwordCheck {
             isPassEquals = false
         }
     }
@@ -84,8 +84,8 @@ class LoginModel: ObservableObject {
         isRegistrationMode.toggle()
         errorMessageText = ""
         // TODO: do not clear email
-        textField3 = ""
-        textField4 = ""
+        name = ""
+        passwordCheck = ""
     }
     
     

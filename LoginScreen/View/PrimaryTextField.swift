@@ -7,22 +7,31 @@
 
 import SwiftUI
 
-// TODO: 
-//struct PrimaryTextField: View {
-//    var body: some View {
-//        //Text("PLACE YOUR CODE HERE")
-//        textField
-//            .padding()
-//    }
-//}
-//
-//private extension PrimaryTextField {
-//    @ViewBuilder
-//    var textField: some View {
-//        if isPassword {
-//            SecureField()
-//        } else {
-//            TextField()
-//        }
-//    }
-//}
+struct PrimaryTextField: View {
+    
+    public var isSecure: Bool = true
+    @Binding var text: String
+    public var title: String
+    
+    var body: some View {
+        //Text("PLACE YOUR CODE HERE")
+        HStack {
+            Group{
+                if isSecure {
+                    SecureField(title, text: $text)
+                }
+                else {
+                    TextField(title, text: $text)
+                }
+            }
+                .disableAutocorrection(true)
+                .textInputAutocapitalization(.never)
+                .padding()
+                .frame(height:55)
+                .background(Color("silver"))
+                .font(.title2)
+            .cornerRadius(10)
+            
+        }
+    }
+}
