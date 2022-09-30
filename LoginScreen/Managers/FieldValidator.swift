@@ -21,8 +21,8 @@ class FieldValidator {
     }
 
     func isValidPass(password: String) -> Bool {
-        let regexEmail = try! NSRegularExpression(pattern: #"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"#)
-        let range1 = NSRange(location: 0, length: password.count)
-        return regexEmail.firstMatch(in: password, options: [], range: range1 ) != nil
+        let regexEmail = try! NSRegularExpression(pattern: #"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"#)
+        let range = NSRange(location: 0, length: password.count)
+        return regexEmail.firstMatch(in: password, options: [], range: range ) != nil
     }
 }

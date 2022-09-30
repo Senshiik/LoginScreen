@@ -20,30 +20,22 @@ struct LoginView: View {
                 }
                 loginField
             }
-            Group {
                 passwordField
                 if model.isRegistrationMode {
                     secondPasswordField
-                }
             }
             Text(model.errorMessageText)
                 .padding(16)
                 .foregroundColor(.salmon)
-            Group {
-                if model.isRegistrationMode {
-                    registerButton
-                    goToLogin
-                }
-            }
             Spacer()
-            if !model.isRegistrationMode {
-                logInButton
-                    .disabled(model.isButtonDisabled)
+                mainButton
+                    .disabled(model.isButtonDisabled && !model.isRegistrationMode)
                 forgotPassButton
-                registrationButton
-            }
+                toggleModeButton
+                
         }
         .padding()
+        .background(Color.background.ignoresSafeArea())
         .ignoresSafeArea()
         .sheet(isPresented: $model.isShowingSheet) {
             SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
@@ -67,13 +59,12 @@ extension LoginView {
     
     private var nameLabel: some View {
         Text("Name")
-            .opacity(model.isRegistrationMode ? 1.0 : 0.0)
             .font(.subheadline)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var loginLabel: some View {
-        Text(model.isRegistrationMode ? "Email" : "Login")
+        Text("Username or Email")
             .font(.subheadline)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -137,12 +128,6 @@ extension LoginView {
             text: $model.passwordCheck,
             title: "Type your password again"
                         )
-            .disableAutocorrection(true)
-            .padding()
-            .font(.title2)
-            .frame(height:55)
-            .background(Color("silver"))
-            .cornerRadius(10)
             .overlay(alignment: .trailing, content: {
                 Button(action: {
                     self.model.passwordCheck = ""})
@@ -155,28 +140,14 @@ extension LoginView {
     }
 
     // TODO: primary button
-    private var logInButton: some View {
-        PrimaryButton(text: "Log in",
+    private var mainButton: some View {
+        PrimaryButton(text: !model.isRegistrationMode ? "Log in" : "Register",
                       style: .primary,
-                      action: model.logIn)
+                      action: model.mainButtonTap)
     }
     
-    private var registerButton: some View {
-        PrimaryButton(text: "Register",
-                      style: .primary,
-                      action: model.register)
-    }
-
-    // TODO: secondary button
-    private var registrationButton: some View {
-        PrimaryButton(text: "Don`t have an account yet?",
-                      style: .primary,
-                      filled: false,
-                      action: model.toggleRegistrationMode)
-    }
-    
-    private var goToLogin: some View {
-        PrimaryButton(text: "Already have an account?",
+    private var toggleModeButton: some View {
+        PrimaryButton(text: !model.isRegistrationMode ? "Don`t have an account yet?" : "Already have an account?",
                       style: .primary,
                       filled: false,
                       action: model.toggleRegistrationMode)

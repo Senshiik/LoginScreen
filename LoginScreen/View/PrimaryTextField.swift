@@ -14,7 +14,6 @@ struct PrimaryTextField: View {
     public var title: String
     
     var body: some View {
-        //Text("PLACE YOUR CODE HERE")
         HStack {
             Group{
                 if isSecure {

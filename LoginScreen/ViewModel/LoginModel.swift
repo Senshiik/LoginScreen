@@ -15,7 +15,7 @@ class LoginModel: ObservableObject {
     @Published public var isAlertPresented: Bool = false
 
     @Published public var isButtonDisabled: Bool = false
-    @Published public var email: String = "" // TODO: normal name. DONE
+    @Published public var email: String = ""
     @Published public var password: String = ""
     @Published public var name: String = ""
     @Published public var passwordCheck: String = ""
@@ -29,10 +29,16 @@ class LoginModel: ObservableObject {
     private var timeRemaining = 0
     private var timer: Timer?
     
-    func logIn() {
+    func mainButtonTap() {
         var isAllValid = true
         let validator = FieldValidator()
-
+        
+        if isRegistrationMode == true && !validator.isValidName(name: name){
+            errorMessageText = "passwords must be equal"
+            isAllValid = false
+            return
+        }
+        
         if !validator.isValidEmail(email: email){
         errorMessageText = "Incorrect email"
             isAllValid = false
@@ -43,36 +49,21 @@ class LoginModel: ObservableObject {
             isAllValid = false
             return
         }
-        if !validator.isValidName(name: name){
-        errorMessageText = "Incorrect name"
+        
+        if isRegistrationMode == true && password != passwordCheck{
+            errorMessageText = "passwords must be equal"
             isAllValid = false
             return
         }
+        
         if isAllValid {
             errorMessageText = ""
         }
-
+        
         if isAllValid && !LoginManager().tryLogin() {
             fails += 1
             startTimer()
-        }
-    }
-
-    func register() {
-        if  validator.isValidName(name: name)  && validator.isValidEmail(email: email) && validator.isValidPass(password: password) && passwordCheck == password{
-            isRegistrationMode.toggle()
-            errorMessageText = ""
-        }
-        if !validator.isValidEmail(email: email){
-            isEmailValid = false
-            errorMessageText = "Incorrect email"
-        }
-        if !validator.isValidPass(password: password){
-            isPassValid = false
-            errorMessageText = "Incorrect password"
-        }
-        if password != passwordCheck {
-            isPassEquals = false
+        errorMessageText = ""
         }
     }
 
@@ -82,10 +73,12 @@ class LoginModel: ObservableObject {
     
     func toggleRegistrationMode() {
         isRegistrationMode.toggle()
+        fails = 0
         errorMessageText = ""
-        // TODO: do not clear email
         name = ""
         passwordCheck = ""
+        timer?.invalidate()
+        
     }
     
     
@@ -98,6 +91,7 @@ class LoginModel: ObservableObject {
         else {
             timer?.invalidate()
             isButtonDisabled = false
+            errorMessageText = ""
         }
     }
 
