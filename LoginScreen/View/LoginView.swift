@@ -14,25 +14,27 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 16) {
             Spacer()
-            Group {
                 if model.isRegistrationMode {
-                    nameField
-                }
-                loginField
+                nameField
             }
+            
+                loginField
                 passwordField
+            
                 if model.isRegistrationMode {
                     secondPasswordField
             }
-            Text(model.errorMessageText)
+            Text(model.messageText)
                 .padding(16)
                 .foregroundColor(.salmon)
             Spacer()
+            
                 mainButton
-                    .disabled(model.isButtonDisabled && !model.isRegistrationMode)
+                    .disabled(model.isButtonDisabled)
+
                 forgotPassButton
                 toggleModeButton
-                
+            
         }
         .padding()
         .background(Color.background.ignoresSafeArea())
@@ -73,19 +75,18 @@ extension LoginView {
     private var nameField: some View {
         nameLabel
         PrimaryTextField(isSecure: false,
-                         text: $model.name,
+                         text: $model.username,
                          title: "Type your name here")
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.name = ""
-                }){
+                    self.model.username = ""
+                }) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding()
             })
     }
-    
 
     @ViewBuilder
     private var loginField: some View {
@@ -95,11 +96,10 @@ extension LoginView {
                          title: "Type your email here...")
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.email = ""})
-                {
+                    self.model.email = ""}) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+                                            }
                 .padding()
             })
     }
@@ -113,11 +113,10 @@ extension LoginView {
                         )
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.password = ""})
-                {
+                    self.model.password = ""}) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+                                                }
                 .padding()
             })
     }
@@ -130,16 +129,14 @@ extension LoginView {
                         )
             .overlay(alignment: .trailing, content: {
                 Button(action: {
-                    self.model.passwordCheck = ""})
-                {
+                    self.model.passwordCheck = ""}) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+                                                    }
                 .padding()
             })
     }
 
-    // TODO: primary button
     private var mainButton: some View {
         PrimaryButton(text: !model.isRegistrationMode ? "Log in" : "Register",
                       style: .primary,
@@ -165,10 +162,9 @@ extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
+        NavigationView {
             LoginView(model: LoginModel())
                 .preferredColorScheme(.dark)
-        }
-
+                       }
     }
 }

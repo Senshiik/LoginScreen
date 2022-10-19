@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		620E9724289DA409005D812E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620E9723289DA409005D812E /* LoginView.swift */; };
 		620E9727289ED9F8005D812E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620E9726289ED9F8005D812E /* LoginModel.swift */; };
+		62278E2628FC6279007D7DCE /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62278E2528FC6279007D7DCE /* TabBarView.swift */; };
+		622B0CBB28F7F2D700D91143 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */; };
+		622B0CBD28F7F6E600D91143 /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */; };
+		625C949E28EDAFE800DFAE16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625C949D28EDAFE800DFAE16 /* User.swift */; };
+		625D55A128E84B5E00575248 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D55A028E84B5E00575248 /* RootView.swift */; };
+		625D55A328E84B6D00575248 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D55A228E84B6D00575248 /* RootViewModel.swift */; };
+		625D55A528E8906A00575248 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D55A428E8906A00575248 /* HomeView.swift */; };
 		62837705289C58690088F226 /* LoginScreenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62837704289C58690088F226 /* LoginScreenApp.swift */; };
 		62837709289C586C0088F226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62837708289C586C0088F226 /* Assets.xcassets */; };
 		6283770C289C586C0088F226 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6283770B289C586C0088F226 /* Preview Assets.xcassets */; };
@@ -16,6 +23,8 @@
 		62837720289C586C0088F226 /* LoginScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6283771F289C586C0088F226 /* LoginScreenUITests.swift */; };
 		62837722289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62837721289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift */; };
 		6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6283772E289C5B570088F226 /* PrimaryButton.swift */; };
+		62AF817728FFDC1E00AD4CBB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817628FFDC1E00AD4CBB /* SettingsView.swift */; };
+		62AF817928FFDD1000AD4CBB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */; };
 		62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */; };
 		62E5D16828AA5863006C1DD4 /* SafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E5D16728AA5863006C1DD4 /* SafariViewController.swift */; };
 		8B5A482328BD4E51003C42E4 /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */; };
@@ -43,6 +52,13 @@
 /* Begin PBXFileReference section */
 		620E9723289DA409005D812E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		620E9726289ED9F8005D812E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		62278E2528FC6279007D7DCE /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
+		625C949D28EDAFE800DFAE16 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		625D55A028E84B5E00575248 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		625D55A228E84B6D00575248 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		625D55A428E8906A00575248 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		62837701289C58690088F226 /* LoginScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62837704289C58690088F226 /* LoginScreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenApp.swift; sourceTree = "<group>"; };
 		62837708289C586C0088F226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +69,8 @@
 		6283771F289C586C0088F226 /* LoginScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITests.swift; sourceTree = "<group>"; };
 		62837721289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6283772E289C5B570088F226 /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		62AF817628FFDC1E00AD4CBB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		62E5D16728AA5863006C1DD4 /* SafariViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewController.swift; sourceTree = "<group>"; };
 		8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
@@ -89,13 +107,26 @@
 			isa = PBXGroup;
 			children = (
 				620E9726289ED9F8005D812E /* LoginModel.swift */,
+				62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */,
+				622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */,
+				622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */,
+				625D55A228E84B6D00575248 /* RootViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		625C949C28EDAFB700DFAE16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				625C949D28EDAFE800DFAE16 /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		628376F8289C58690088F226 = {
 			isa = PBXGroup;
 			children = (
+				625C949C28EDAFB700DFAE16 /* Model */,
 				62837703289C58690088F226 /* LoginScreen */,
 				62837714289C586C0088F226 /* LoginScreenTests */,
 				6283771E289C586C0088F226 /* LoginScreenUITests */,
@@ -157,9 +188,13 @@
 			isa = PBXGroup;
 			children = (
 				6283772E289C5B570088F226 /* PrimaryButton.swift */,
+				62278E2528FC6279007D7DCE /* TabBarView.swift */,
+				625D55A428E8906A00575248 /* HomeView.swift */,
 				8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */,
+				62AF817628FFDC1E00AD4CBB /* SettingsView.swift */,
 				62E5D16728AA5863006C1DD4 /* SafariViewController.swift */,
 				620E9723289DA409005D812E /* LoginView.swift */,
+				625D55A028E84B5E00575248 /* RootView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +226,7 @@
 				628376FD289C58690088F226 /* Sources */,
 				628376FE289C58690088F226 /* Frameworks */,
 				628376FF289C58690088F226 /* Resources */,
+				622B0CBE28F9A19A00D91143 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,19 +342,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		622B0CBE28F9A19A00D91143 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		628376FD289C58690088F226 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625C949E28EDAFE800DFAE16 /* User.swift in Sources */,
 				620E9727289ED9F8005D812E /* LoginModel.swift in Sources */,
 				6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */,
 				8B5A482628BD501B003C42E4 /* ColorExtension.swift in Sources */,
 				62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */,
+				62AF817728FFDC1E00AD4CBB /* SettingsView.swift in Sources */,
+				62AF817928FFDD1000AD4CBB /* SettingsViewModel.swift in Sources */,
+				622B0CBB28F7F2D700D91143 /* HomeViewModel.swift in Sources */,
+				625D55A128E84B5E00575248 /* RootView.swift in Sources */,
 				620E9724289DA409005D812E /* LoginView.swift in Sources */,
 				62837705289C58690088F226 /* LoginScreenApp.swift in Sources */,
+				622B0CBD28F7F6E600D91143 /* ErrorViewModel.swift in Sources */,
+				62278E2628FC6279007D7DCE /* TabBarView.swift in Sources */,
 				8B5A482828BD547E003C42E4 /* FieldValidator.swift in Sources */,
+				625D55A328E84B6D00575248 /* RootViewModel.swift in Sources */,
 				8B5A482328BD4E51003C42E4 /* PrimaryTextField.swift in Sources */,
+				625D55A528E8906A00575248 /* HomeView.swift in Sources */,
 				62E5D16828AA5863006C1DD4 /* SafariViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

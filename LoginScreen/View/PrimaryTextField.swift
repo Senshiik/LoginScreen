@@ -15,18 +15,17 @@ struct PrimaryTextField: View {
     
     var body: some View {
         HStack {
-            Group{
+            Group {
                 if isSecure {
                     SecureField(title, text: $text)
-                }
-                else {
+                } else {
                     TextField(title, text: $text)
                 }
             }
                 .disableAutocorrection(true)
                 .textInputAutocapitalization(.never)
                 .padding()
-                .frame(height:55)
+                .frame(height: 55)
                 .background(Color("silver"))
                 .font(.title2)
             .cornerRadius(10)

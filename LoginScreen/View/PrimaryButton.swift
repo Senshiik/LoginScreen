@@ -48,8 +48,7 @@ struct PrimaryButton: View {
             .lineLimit(1)
             .foregroundColor(filled ? .white : color)
             .padding()
-            .frame(maxWidth:.infinity)
-            //.textCenter()
+            .frame(maxWidth: .infinity)
     }
 }
 
@@ -89,4 +88,3 @@ struct PrimaryButton_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
-

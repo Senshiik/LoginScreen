@@ -9,18 +9,19 @@ import Foundation
 import SwiftUI
 
 class LoginModel: ObservableObject {
-
+    
     @Published public var isRegistrationMode: Bool = false
     @Published public var isShowingSheet: Bool = false
     @Published public var isAlertPresented: Bool = false
-
+    
     @Published public var isButtonDisabled: Bool = false
     @Published public var email: String = ""
     @Published public var password: String = ""
-    @Published public var name: String = ""
+    @Published public var username: String = ""
     @Published public var passwordCheck: String = ""
-
-    @Published public var errorMessageText: String = ""
+    
+    @Published public var messageText: String = ""
+    
     var validator = FieldValidator()
     private var isEmailValid: Bool = true
     private var isPassValid: Bool = true
@@ -31,42 +32,67 @@ class LoginModel: ObservableObject {
     
     func mainButtonTap() {
         var isAllValid = true
-        let validator = FieldValidator()
         
-        if isRegistrationMode == true && !validator.isValidName(name: name){
-            errorMessageText = "passwords must be equal"
+        if isRegistrationMode && !validator.isValidName(username: username) {
+            messageText = "Incorrect name"
             isAllValid = false
-            return
-        }
+                                                                             }
         
-        if !validator.isValidEmail(email: email){
-        errorMessageText = "Incorrect email"
-            isAllValid = false
-            return
-        }
-        if !validator.isValidPass(password: password){
-            errorMessageText = "Incorrect password"
-            isAllValid = false
-            return
-        }
+        if !validator.isValidEmail(email: email) {
+            if isAllValid {
+                messageText = "Incorrect email"
+                isAllValid = false
+                          }
+                                                 }
         
-        if isRegistrationMode == true && password != passwordCheck{
-            errorMessageText = "passwords must be equal"
-            isAllValid = false
-            return
-        }
+        if !validator.isValidPass(password: password) {
+            if isAllValid {
+                messageText = "Incorrect password"
+                isAllValid = false
+            }
+                                                       }
+        
+        if isRegistrationMode == true && password != passwordCheck {
+            if isAllValid {
+                messageText = "Passwords must be equal"
+                isAllValid = false
+            }
+                                                                    }
         
         if isAllValid {
-            errorMessageText = ""
-        }
-        
-        if isAllValid && !LoginManager().tryLogin() {
+            messageText = ""
+            syncTryLogReg()
+        } else {
             fails += 1
             startTimer()
-        errorMessageText = ""
+            messageText = ""
         }
     }
-
+    
+    func syncTryLogReg() {
+        Task(priority: .medium) {
+            
+            if isRegistrationMode {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                do {
+                    try await
+                    LoginManager.shared.tryRegister(username: username, email: email, password: password)
+                } catch {
+                    print("idiot1111")
+                    messageText = CustomError.invalidRegistration.description
+                        }
+                                  } else {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                do {
+                    try await LoginManager.shared.tryLogin(email: email, password: password)
+                } catch {
+                    print("idiot")
+                    messageText = CustomError.invalidLogin.description
+                        }
+            }
+        }
+    }
+    
     func toggleSheet() {
         isShowingSheet.toggle()
     }
@@ -74,27 +100,24 @@ class LoginModel: ObservableObject {
     func toggleRegistrationMode() {
         isRegistrationMode.toggle()
         fails = 0
-        errorMessageText = ""
-        name = ""
+        messageText = ""
+        username = ""
         passwordCheck = ""
         timer?.invalidate()
         
     }
     
-    
-    
     @objc func timerTick() {
         if timeRemaining > 0 {
-            errorMessageText = "Your email or password is wrong. Try again in \(timeRemaining)"
+            messageText = "Your email or password is wrong. Try again in \(timeRemaining)"
             timeRemaining -= 1
-        }
-        else {
+        } else {
             timer?.invalidate()
             isButtonDisabled = false
-            errorMessageText = ""
+            messageText = ""
         }
     }
-
+    
     private func startTimer() {
         if fails > 3 && fails % 4 == 0 {
             isAlertPresented.toggle()
@@ -107,11 +130,15 @@ class LoginModel: ObservableObject {
                 timeRemaining = 10
             }
             isButtonDisabled = true
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(
+                timeInterval: 1.0,
+                target: self,
+                selector: #selector(timerTick),
+                userInfo: nil,
+                repeats: true)
             return
         }
         isButtonDisabled = false
         return
     }
-    
 }
