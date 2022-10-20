@@ -17,6 +17,7 @@ class RootViewModel: ObservableObject {
     enum Screen {
         case tabBar
         case login
+        case fullScreenCover
     }
     
     @Published var rootScreen: Screen = .login

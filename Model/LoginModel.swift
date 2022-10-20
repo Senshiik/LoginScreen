@@ -21,7 +21,8 @@ class LoginModel: ObservableObject {
     @Published public var passwordCheck: String = ""
     
     @Published public var messageText: String = ""
-    
+    @Published public var timeRemainingText: String = ""
+
     var validator = FieldValidator()
     private var isEmailValid: Bool = true
     private var isPassValid: Bool = true
@@ -30,7 +31,7 @@ class LoginModel: ObservableObject {
     private var timeRemaining = 0
     private var timer: Timer?
     
-    func mainButtonTap() {
+    @MainActor func mainButtonTap() {
         var isAllValid = true
         
         if isRegistrationMode && !validator.isValidName(username: username) {
@@ -68,25 +69,25 @@ class LoginModel: ObservableObject {
             messageText = ""
         }
     }
-    
+    @MainActor
     func syncTryLogReg() {
-        Task(priority: .medium) {
-            
+        Task(priority: .high) {
             if isRegistrationMode {
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
-                    try await
-                    LoginManager.shared.tryRegister(username: username, email: email, password: password)
+                    try await LoginManager.shared.tryRegister(username: username, email: email, password: password)
+                    try await Task.sleep(nanoseconds: 4_000_000_000)
+                    RootViewModel.shared.rootScreen = .tabBar
                 } catch {
-                    print("idiot1111")
                     messageText = CustomError.invalidRegistration.description
                         }
                                   } else {
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
                     try await LoginManager.shared.tryLogin(email: email, password: password)
+                    try await Task.sleep(nanoseconds: 4_000_000_000)
+                    RootViewModel.shared.rootScreen = .tabBar
                 } catch {
-                    print("idiot")
                     messageText = CustomError.invalidLogin.description
                         }
             }

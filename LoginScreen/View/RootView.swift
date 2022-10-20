@@ -15,6 +15,7 @@ struct RootView: View {
         switch model.rootScreen {
         case.login: LoginView(model: LoginModel())
         case.tabBar: TabBarView()
+        case.fullScreenCover: EmailVerificationView()
         }
     }
 }

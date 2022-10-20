@@ -25,6 +25,8 @@
 		6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6283772E289C5B570088F226 /* PrimaryButton.swift */; };
 		62AF817728FFDC1E00AD4CBB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817628FFDC1E00AD4CBB /* SettingsView.swift */; };
 		62AF817928FFDD1000AD4CBB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */; };
+		62AF817B28FFF84800AD4CBB /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817A28FFF84800AD4CBB /* EmailVerificationViewModel.swift */; };
+		62AF817D28FFF85900AD4CBB /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817C28FFF85900AD4CBB /* EmailVerificationView.swift */; };
 		62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */; };
 		62E5D16828AA5863006C1DD4 /* SafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E5D16728AA5863006C1DD4 /* SafariViewController.swift */; };
 		8B5A482328BD4E51003C42E4 /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */; };
@@ -71,6 +73,8 @@
 		6283772E289C5B570088F226 /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		62AF817628FFDC1E00AD4CBB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		62AF817A28FFF84800AD4CBB /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
+		62AF817C28FFF85900AD4CBB /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
 		62B8974F28B68A7C00F0E6D4 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		62E5D16728AA5863006C1DD4 /* SafariViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewController.swift; sourceTree = "<group>"; };
 		8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
@@ -106,8 +110,8 @@
 		620E9725289ED9DE005D812E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				620E9726289ED9F8005D812E /* LoginModel.swift */,
 				62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */,
+				62AF817A28FFF84800AD4CBB /* EmailVerificationViewModel.swift */,
 				622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */,
 				622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */,
 				625D55A228E84B6D00575248 /* RootViewModel.swift */,
@@ -118,6 +122,7 @@
 		625C949C28EDAFB700DFAE16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				620E9726289ED9F8005D812E /* LoginModel.swift */,
 				625C949D28EDAFE800DFAE16 /* User.swift */,
 			);
 			path = Model;
@@ -189,6 +194,7 @@
 			children = (
 				6283772E289C5B570088F226 /* PrimaryButton.swift */,
 				62278E2528FC6279007D7DCE /* TabBarView.swift */,
+				62AF817C28FFF85900AD4CBB /* EmailVerificationView.swift */,
 				625D55A428E8906A00575248 /* HomeView.swift */,
 				8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */,
 				62AF817628FFDC1E00AD4CBB /* SettingsView.swift */,
@@ -377,7 +383,9 @@
 				622B0CBB28F7F2D700D91143 /* HomeViewModel.swift in Sources */,
 				625D55A128E84B5E00575248 /* RootView.swift in Sources */,
 				620E9724289DA409005D812E /* LoginView.swift in Sources */,
+				62AF817B28FFF84800AD4CBB /* EmailVerificationViewModel.swift in Sources */,
 				62837705289C58690088F226 /* LoginScreenApp.swift in Sources */,
+				62AF817D28FFF85900AD4CBB /* EmailVerificationView.swift in Sources */,
 				622B0CBD28F7F6E600D91143 /* ErrorViewModel.swift in Sources */,
 				62278E2628FC6279007D7DCE /* TabBarView.swift in Sources */,
 				8B5A482828BD547E003C42E4 /* FieldValidator.swift in Sources */,

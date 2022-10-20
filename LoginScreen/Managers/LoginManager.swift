@@ -17,7 +17,7 @@ class LoginManager: ObservableObject {
     private init() {
         
     }
-    
+    @MainActor
     func tryRegister(username: String, email: String, password: String) async throws {
         for  (user, _) in savedUsers {
             if (user.email == email || user.username == username) {
@@ -38,18 +38,17 @@ class LoginManager: ObservableObject {
         let newUser = User(username: username, email: email)
         savedUsers[newUser] = password
         currentUser = newUser
-        RootViewModel.shared.rootScreen = .tabBar
+        RootViewModel.shared.rootScreen = .fullScreenCover
         
         return
         }
     
+    @MainActor
     func tryLogin(email: String, password: String) async throws {
         for  (user, userPassword) in savedUsers {
             if user.email == email && userPassword == password {
                 currentUser = User(username: user.username, email: email)
-                RootViewModel.shared.rootScreen = .tabBar
-                print(user.username)
-                print("228")
+                RootViewModel.shared.rootScreen = .fullScreenCover
                 return
             }
         }
