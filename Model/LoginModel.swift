@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Alamofire
 
 class LoginModel: ObservableObject {
     
@@ -30,8 +31,8 @@ class LoginModel: ObservableObject {
     private var fails: Int = 0
     private var timeRemaining = 0
     private var timer: Timer?
-    
-    @MainActor func mainButtonTap() {
+   
+     func mainButtonTap() {
         var isAllValid = true
         
         if isRegistrationMode && !validator.isValidName(username: username) {
@@ -69,7 +70,6 @@ class LoginModel: ObservableObject {
             messageText = ""
         }
     }
-    @MainActor
     func syncTryLogReg() {
         Task(priority: .high) {
             if isRegistrationMode {
@@ -77,7 +77,9 @@ class LoginModel: ObservableObject {
                 do {
                     try await LoginManager.shared.tryRegister(username: username, email: email, password: password)
                     try await Task.sleep(nanoseconds: 4_000_000_000)
-                    RootViewModel.shared.rootScreen = .tabBar
+                    DispatchQueue.main.async {
+                        RootViewModel.shared.rootScreen = .tabBar
+                    }
                 } catch {
                     messageText = CustomError.invalidRegistration.description
                         }
@@ -86,7 +88,9 @@ class LoginModel: ObservableObject {
                 do {
                     try await LoginManager.shared.tryLogin(email: email, password: password)
                     try await Task.sleep(nanoseconds: 4_000_000_000)
+                    DispatchQueue.main.async {
                     RootViewModel.shared.rootScreen = .tabBar
+                    }
                 } catch {
                     messageText = CustomError.invalidLogin.description
                         }

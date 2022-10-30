@@ -12,6 +12,15 @@ class RootViewModel: ObservableObject {
     
     static let shared = RootViewModel()
     private init() {
+
+        if TokenManager.shared.isLoggedIn() {
+            Task {
+                LoginManager.shared.currentUser =  await UserApiManager().getUser()
+            }
+            rootScreen = .tabBar
+        } else {
+            rootScreen = .login
+        }
         
     }
     enum Screen {

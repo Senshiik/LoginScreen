@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import AlamofireNetworkActivityLogger
 
 @main
 struct LoginScreenApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView().onAppear(perform: {
+                NetworkActivityLogger.shared.startLogging()
+                NetworkActivityLogger.shared.level = .debug
+                
+            })
         }
     }
 }

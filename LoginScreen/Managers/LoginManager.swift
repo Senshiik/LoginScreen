@@ -8,9 +8,11 @@
 import Foundation
 import SwiftUI
 import Security
+import Alamofire
 
 class LoginManager: ObservableObject {
     
+    var request: DataRequest?
     var currentUser: User?
     var savedUsers: [User: String] = [:]
     static let shared = LoginManager()
@@ -19,11 +21,13 @@ class LoginManager: ObservableObject {
     }
     @MainActor
     func tryRegister(username: String, email: String, password: String) async throws {
-        for  (user, _) in savedUsers {
-            if (user.email == email || user.username == username) {
-                return
-                                                                   }
-                                    }
+        
+        let tokens = await UserApiManager().requestRegister(email: email, password: password)
+        if  let tokens = tokens {
+            TokenManager.shared.saveTokens(tokens: tokens)
+        }
+        print("TOKENI", tokens?.accessToken as Any)
+        RootViewModel.shared.rootScreen = .fullScreenCover
         let attributes: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: username,
@@ -35,22 +39,31 @@ class LoginManager: ObservableObject {
         } else {
             print("Something went wrong trying to save the user in the keychain")
         }
-        let newUser = User(username: username, email: email)
-        savedUsers[newUser] = password
-        currentUser = newUser
+        currentUser = await UserApiManager().getUser()
+        print(currentUser?.email as Any)
         RootViewModel.shared.rootScreen = .fullScreenCover
         
         return
-        }
+    }
     
-    @MainActor
     func tryLogin(email: String, password: String) async throws {
-        for  (user, userPassword) in savedUsers {
-            if user.email == email && userPassword == password {
-                currentUser = User(username: user.username, email: email)
-                RootViewModel.shared.rootScreen = .fullScreenCover
-                return
-            }
+        
+        let tokens = await UserApiManager().requestLogin(email: email, password: password)
+        
+        if  let tokens = tokens {
+            TokenManager.shared.saveTokens(tokens: tokens)
         }
+        currentUser = await UserApiManager().getUser()
+        print(currentUser?.email as Any)
+        RootViewModel.shared.rootScreen = .fullScreenCover
+        return
+    }
+}
+
+extension Collection {
+    
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

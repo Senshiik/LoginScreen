@@ -6,17 +6,16 @@
 //
 
 import Foundation
-class User: Hashable, Equatable {
+class User: Hashable, Equatable, Decodable {
     
-    let id = UUID()
-    var username: String = ""
+    var id = UUID()
+    var name: String = ""
     var email: String = ""
+    var phone: String = ""
+    var lang: String = ""
+    var country: String = ""
+    var birthdate = Date()
     
-    init(username: String, email: String) {
-        self.username = username
-        self.email = email
-
-    }
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
