@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @StateObject public var model: LoginModel
+    @StateObject public var model: LoginViewModel
     
     var body: some View {
         VStack(spacing: 16) {
@@ -163,7 +163,7 @@ extension LoginView {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LoginView(model: LoginModel())
+            LoginView(model: LoginViewModel())
                 .preferredColorScheme(.dark)
                        }
     }

@@ -9,7 +9,6 @@ import Foundation
 
 enum CustomError: Error {
     case invalidLogin
-
     case invalidRegistration
 }
 

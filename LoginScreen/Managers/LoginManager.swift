@@ -12,21 +12,21 @@ import Alamofire
 
 class LoginManager: ObservableObject {
     
-    var request: DataRequest?
     var currentUser: User?
-    var savedUsers: [User: String] = [:]
     static let shared = LoginManager()
     private init() {
         
     }
-    @MainActor
     func tryRegister(username: String, email: String, password: String) async throws {
         
         let tokens = await UserApiManager().requestRegister(email: email, password: password)
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)
         }
-        print("TOKENI", tokens?.accessToken as Any)
+        if tokens?.accessToken == nil {
+            logOut()
+        }
+        print("TOKENS", tokens?.accessToken as Any)
         RootViewModel.shared.rootScreen = .fullScreenCover
         let attributes: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -39,24 +39,50 @@ class LoginManager: ObservableObject {
         } else {
             print("Something went wrong trying to save the user in the keychain")
         }
-        currentUser = await UserApiManager().getUser()
+        do {
+            currentUser = try await UserApiManager().getUser()
+        } catch LoginError.totpMissed {
+            print("totp_missed")
+            return
+        }
+        if (currentUser == nil) {
+            logOut()
+        } else {
         print(currentUser?.email as Any)
+        DispatchQueue.main.async {
         RootViewModel.shared.rootScreen = .fullScreenCover
-        
-        return
+            }
+        }
     }
     
     func tryLogin(email: String, password: String) async throws {
         
-        let tokens = await UserApiManager().requestLogin(email: email, password: password)
-        
+        let tokens = try await UserApiManager().requestLogin(email: email, password: password)
+        print("Tokens")
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)
         }
-        currentUser = await UserApiManager().getUser()
+        currentUser = try await UserApiManager().getUser()
+        print("current user")
         print(currentUser?.email as Any)
+        DispatchQueue.main.async {
         RootViewModel.shared.rootScreen = .fullScreenCover
+        }
         return
+    }
+    
+    func logOut() {
+        DispatchQueue.main.async {
+        RootViewModel.shared.rootScreen = .login
+        }
+        TokenManager.shared.accessToken = nil
+        TokenManager.shared.refreshToken = nil
+    }
+    
+    func delete() {
+        Task {
+        await UserApiManager().deleteUser()
+        }
     }
 }
 

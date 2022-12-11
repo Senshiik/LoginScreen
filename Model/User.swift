@@ -8,13 +8,23 @@
 import Foundation
 class User: Hashable, Equatable, Decodable {
     
-    var id = UUID()
-    var name: String = ""
     var email: String = ""
-    var phone: String = ""
+    var username: String = ""
+    var name: String = ""
     var lang: String = ""
     var country: String = ""
     var birthdate = Date()
+    var id = UUID()
+    var isEmailVerified: Bool = true
+    var is2faEnabled: Bool = true
+    var registrationDate = Date()
+    
+    enum CodingKeys: String, CodingKey {
+    case isEmailVerified = "is_email_verified"
+    case is2faEnabled = "is_2fa_enabled"
+    case registrationDate = "registration_date"
+
+    }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

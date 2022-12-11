@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Alamofire
 
-class LoginModel: ObservableObject {
+class LoginViewModel: ObservableObject {
     
     @Published public var isRegistrationMode: Bool = false
     @Published public var isShowingSheet: Bool = false
@@ -81,23 +81,25 @@ class LoginModel: ObservableObject {
                         RootViewModel.shared.rootScreen = .tabBar
                     }
                 } catch {
-                    messageText = CustomError.invalidRegistration.description
-                        }
+                    print("Error found")
+                    await handleErrors(error: error)
+                }
                                   } else {
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
                     try await LoginManager.shared.tryLogin(email: email, password: password)
+                    print("Trying login")
                     try await Task.sleep(nanoseconds: 4_000_000_000)
                     DispatchQueue.main.async {
                     RootViewModel.shared.rootScreen = .tabBar
                     }
                 } catch {
-                    messageText = CustomError.invalidLogin.description
+                    print("Error found")
+                    await handleErrors(error: error)
                         }
             }
         }
     }
-    
     func toggleSheet() {
         isShowingSheet.toggle()
     }
@@ -145,5 +147,24 @@ class LoginModel: ObservableObject {
         }
         isButtonDisabled = false
         return
+    }
+    func handleErrors(error: Error) async {
+        print("HANDLING ERRORS....")
+        switch error as? LoginError {
+        case .totpMissed:
+            print("totpMissed")
+        case .totpInvalid:
+            print("totpInvalid")
+        case .emailNotVerified:
+            print("email not verified")
+        case .none:
+            print("Unexpected error")
+        case .tokenExpired:
+            print("Token expired")
+        case .invalidToken:
+            print("Invalid token")
+        case .unexpectedError:
+            print("Unexpected error")
+        }
     }
 }

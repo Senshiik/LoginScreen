@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
+    
+    @Published public var ispresented: Bool = false
+    
+    func isConfirmed() {
+        ispresented.toggle()
+    }
     func switchTab() {
         RootViewModel.shared.rootScreen = .login
     }

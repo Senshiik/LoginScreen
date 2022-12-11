@@ -15,7 +15,6 @@ struct HomeView: View {
         VStack {
             textView(text: LoginManager.shared.currentUser?.name ?? "name")
             textView(text: LoginManager.shared.currentUser?.email ?? "email")
-            textView(text: LoginManager.shared.currentUser?.phone ?? "phone")
             textView(text: LoginManager.shared.currentUser?.lang ?? "lang")
             textView(text: dateConverter(date: LoginManager.shared.currentUser?.birthdate ?? Date()) )
             textView(text: LoginManager.shared.currentUser?.id.uuidString ?? "id")

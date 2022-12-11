@@ -14,7 +14,7 @@ struct TabBarView: View {
                 .tabItem {
                 Label("Home", systemImage: "house.fill")
                          }
-            SettingsView()
+            SettingsView(model: SettingsViewModel())
                 .tabItem {
                         Label("Settings", systemImage: "slider.horizontal.3")
                          }

@@ -15,7 +15,7 @@ class RootViewModel: ObservableObject {
 
         if TokenManager.shared.isLoggedIn() {
             Task {
-                LoginManager.shared.currentUser =  await UserApiManager().getUser()
+                await UserApiManager().refresh()
             }
             rootScreen = .tabBar
         } else {

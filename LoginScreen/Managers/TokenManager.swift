@@ -38,7 +38,7 @@ class TokenManager: ObservableObject {
         return false
     }
     
-    private func isAlive(token: String) -> Bool {
+    public func  isAlive(token: String) -> Bool {
             guard
                 let encodedSubstring = token.split(separator: ".")[safe: 1],
                     let decodedData = Data(base64Encoded: String(encodedSubstring))

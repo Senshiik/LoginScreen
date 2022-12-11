@@ -9,32 +9,41 @@ import Foundation
 import Alamofire
 
 class UserApiManager: ObservableObject {
-
-    func getUser() async -> User? {
+    
+    func getUser() async throws -> User? {
+        
         guard let accessToken = TokenManager.shared.accessToken
-                else {return nil}
+        else {return nil}
         var headers = HTTPHeaders()
         headers.add(.authorization(bearerToken: accessToken))
+        let request = AF.request("https://home.parker-programs.com/api/user",
+                                 headers: headers)
         do {
-            return try await AF.request("https://home.parker-programs.com/api/user", headers: headers).serializingDecodable(User.self).value
+            let user = try await request.serializingDecodable(User.self).value
+            return user
         } catch {
-            print(#file, #function, #line, error)
-            return nil
+            try await apiErrorHandler(request: request)
         }
+        return nil
     }
-    func requestLogin(email: String, password: String) async -> TokensPair? {
+    
+    func requestLogin(email: String, password: String) async throws -> TokensPair? {
         
         let parameters: [String: String] = [
             "username": email,
             "password": password
         ]
-        
+        let request = AF.request("https://home.parker-programs.com/api/user/login",
+                                 method: .post,
+                                 parameters: parameters,
+                                 encoder: .urlEncodedForm)
         do {
-            return try await AF.request("https://home.parker-programs.com/api/user/login", method: .post, parameters: parameters, encoder: .urlEncodedForm).serializingDecodable(TokensPair.self).value
+            let tokens = try await request.serializingDecodable(TokensPair.self).value
+            return tokens
         } catch {
-            print(#file, #function, #line, error)
-            return nil
+            try await apiErrorHandler(request: request)
         }
+        return nil
     }
     
     func requestRegister(email: String, password: String) async -> TokensPair? {
@@ -45,10 +54,77 @@ class UserApiManager: ObservableObject {
         ]
         
         do {
-            return try await AF.request("https://home.parker-programs.com/api/user/register", method: .post, parameters: parameters, encoder: .urlEncodedForm).serializingDecodable(TokensPair.self).value
+            return try await AF.request("https://home.parker-programs.com/api/user/register",
+                                        method: .post,
+                                        parameters: parameters,
+                                        encoder: .urlEncodedForm).validate().serializingDecodable(TokensPair.self).value
         } catch {
-            print(#file, #function, #line, error)
+            print("ERROR")
+            print(error)
             return nil
         }
     }
+    
+    func refresh() async {
+        if let accessToken = TokenManager.shared.accessToken, TokenManager.shared.isAlive(token: accessToken) {
+            return
+        }
+        guard let refreshToken = TokenManager.shared.refreshToken else {
+            LoginManager.shared.logOut()
+            return
+        }
+        guard TokenManager.shared.isAlive(token: refreshToken) else {return LoginManager.shared.logOut()}
+        let parameters: [String: String] = ["refresh_token": refreshToken]
+        do {
+            let tokens = try await AF.request("https://home.parker-programs.com/api/user/refresh", method: .post, parameters: parameters, encoder: .urlEncodedForm).validate().serializingDecodable(TokensPair.self).value
+            TokenManager.shared.refreshToken = tokens.refreshToken
+            TokenManager.shared.accessToken = tokens.accessToken
+        } catch {
+            print("ERROR!")
+            print(#file, #function, #line, error)
+            
+        }
+    }
+    
+    func deleteUser() async {
+        guard let accessToken = TokenManager.shared.accessToken
+        else {return}
+        var headers = HTTPHeaders()
+        headers.add(.authorization(bearerToken: accessToken))
+        do {
+            _ = try await AF.request("https://home.parker-programs.com/api/user",
+                                     method: .delete,
+                                     headers: headers).validate().serializingData().value
+            LoginManager.shared.logOut()
+        } catch {
+            print(#file, #function, #line, error)
+            return
+        }
+    }
+    func apiErrorHandler(request: DataRequest) async throws {
+        let decoder: JSONDecoder = {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return decoder
+        }()
+        var errorDetail: ApiExceptionBody
+        do {
+            errorDetail = try await request.serializingDecodable(ApiExceptionBody.self, decoder: decoder).value
+         } catch {
+             print("Exception parsing error: \(error)")
+             return
+         }
+        switch errorDetail.detail.type { // обрабатываем ошибку
+        case .tokenExpired:
+            print("Refresh")
+            await refresh()
+        case .totpMissed:
+            throw LoginError.totpMissed // handle in loginVm
+        case .invalidToken:
+            throw LoginError.invalidToken
+        default: throw ApiError.unexpectedError
+        }
+        
+    }
+    
 }

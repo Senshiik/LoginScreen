@@ -13,7 +13,7 @@ struct RootView: View {
     
     var body: some View {
         switch model.rootScreen {
-        case.login: LoginView(model: LoginModel())
+        case.login: LoginView(model: LoginViewModel())
         case.tabBar: TabBarView()
         case.fullScreenCover: EmailVerificationView()
         }
