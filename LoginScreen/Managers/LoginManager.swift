@@ -22,12 +22,14 @@ class LoginManager: ObservableObject {
         let tokens = await UserApiManager().requestRegister(email: email, password: password)
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)
-        }
-        if tokens?.accessToken == nil {
+        } else {
             logOut()
+            return
         }
         print("TOKENS", tokens?.accessToken as Any)
+        DispatchQueue.main.async {
         RootViewModel.shared.rootScreen = .fullScreenCover
+        }
         let attributes: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: username,
@@ -39,19 +41,12 @@ class LoginManager: ObservableObject {
         } else {
             print("Something went wrong trying to save the user in the keychain")
         }
-        do {
-            currentUser = try await UserApiManager().getUser()
-        } catch LoginError.totpMissed {
-            print("totp_missed")
-            return
-        }
-        if (currentUser == nil) {
-            logOut()
-        } else {
+        
+        currentUser = try await UserApiManager().getUser()
         print(currentUser?.email as Any)
         DispatchQueue.main.async {
         RootViewModel.shared.rootScreen = .fullScreenCover
-            }
+            
         }
     }
     
@@ -61,13 +56,12 @@ class LoginManager: ObservableObject {
         print("Tokens")
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)
+            currentUser = try await UserApiManager().getUser()
+            DispatchQueue.main.async {
+            RootViewModel.shared.rootScreen = .fullScreenCover
+            }
         }
-        currentUser = try await UserApiManager().getUser()
-        print("current user")
-        print(currentUser?.email as Any)
-        DispatchQueue.main.async {
-        RootViewModel.shared.rootScreen = .fullScreenCover
-        }
+        
         return
     }
     

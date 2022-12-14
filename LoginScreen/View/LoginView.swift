@@ -14,26 +14,26 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 16) {
             Spacer()
-                if model.isRegistrationMode {
+            if model.isRegistrationMode {
                 nameField
             }
             
-                loginField
-                passwordField
+            loginField
+            passwordField
             
-                if model.isRegistrationMode {
-                    secondPasswordField
+            if model.isRegistrationMode {
+                secondPasswordField
             }
             Text(model.messageText)
                 .padding(16)
                 .foregroundColor(.salmon)
             Spacer()
             
-                mainButton
-                    .disabled(model.isButtonDisabled)
-
-                forgotPassButton
-                toggleModeButton
+            mainButton
+                .disabled(model.isButtonDisabled)
+            
+            forgotPassButton
+            toggleModeButton
             
         }
         .padding()
@@ -42,9 +42,14 @@ struct LoginView: View {
         .sheet(isPresented: $model.isShowingSheet) {
             SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
         }
+        .sheet(isPresented: $model.isTotpMissed) {
+            TotpTextFieldView(model: TotpViewModel(delegate: model))
+            Button("Submit", role: .cancel, action: model.syncTryLogReg)
+        }
         .alert("Forgot password?", isPresented: $model.isAlertPresented) {
             Button("Try again", role: .cancel) {}
             Button("reset the password", action: model.toggleSheet)
+                
         }
     }
 }
@@ -77,31 +82,31 @@ extension LoginView {
         PrimaryTextField(isSecure: false,
                          text: $model.username,
                          title: "Type your name here")
-            .overlay(alignment: .trailing, content: {
-                Button(action: {
-                    self.model.username = ""
-                }) {
-                    Image(systemName: "delete.left")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                .padding()
-            })
+        .overlay(alignment: .trailing, content: {
+            Button(action: {
+                self.model.username = ""
+            }) {
+                Image(systemName: "delete.left")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .padding()
+        })
     }
-
+    
     @ViewBuilder
     private var loginField: some View {
         loginLabel
         PrimaryTextField(isSecure: false,
                          text: $model.email,
                          title: "Type your email here...")
-            .overlay(alignment: .trailing, content: {
-                Button(action: {
-                    self.model.email = ""}) {
+        .overlay(alignment: .trailing, content: {
+            Button(action: {
+                self.model.email = ""}) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                                            }
+                }
                 .padding()
-            })
+        })
     }
     @ViewBuilder
     private var passwordField: some View {
@@ -110,15 +115,15 @@ extension LoginView {
             isSecure: true,
             text: $model.password,
             title: "Type your password here..."
-                        )
-            .overlay(alignment: .trailing, content: {
-                Button(action: {
-                    self.model.password = ""}) {
+        )
+        .overlay(alignment: .trailing, content: {
+            Button(action: {
+                self.model.password = ""}) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                                                }
+                }
                 .padding()
-            })
+        })
     }
     
     private var secondPasswordField: some View {
@@ -126,17 +131,17 @@ extension LoginView {
             isSecure: true,
             text: $model.passwordCheck,
             title: "Type your password again"
-                        )
-            .overlay(alignment: .trailing, content: {
-                Button(action: {
-                    self.model.passwordCheck = ""}) {
+        )
+        .overlay(alignment: .trailing, content: {
+            Button(action: {
+                self.model.passwordCheck = ""}) {
                     Image(systemName: "delete.left")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                                                    }
+                }
                 .padding()
-            })
+        })
     }
-
+    
     private var mainButton: some View {
         PrimaryButton(text: !model.isRegistrationMode ? "Log in" : "Register",
                       style: .primary,
@@ -165,6 +170,6 @@ struct LoginView_Previews: PreviewProvider {
         NavigationView {
             LoginView(model: LoginViewModel())
                 .preferredColorScheme(.dark)
-                       }
+        }
     }
 }

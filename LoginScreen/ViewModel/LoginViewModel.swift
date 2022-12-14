@@ -9,21 +9,24 @@ import Foundation
 import SwiftUI
 import Alamofire
 
-class LoginViewModel: ObservableObject {
+class LoginViewModel: ObservableObject, TotpViewModelDelegate {
+    
+    func didEnterCode(code: String) {
+        print("code is \(code)")
+    }
     
     @Published public var isRegistrationMode: Bool = false
     @Published public var isShowingSheet: Bool = false
     @Published public var isAlertPresented: Bool = false
-    
+    @Published public var isTotpMissed: Bool = false
     @Published public var isButtonDisabled: Bool = false
     @Published public var email: String = ""
     @Published public var password: String = ""
     @Published public var username: String = ""
     @Published public var passwordCheck: String = ""
-    
     @Published public var messageText: String = ""
     @Published public var timeRemainingText: String = ""
-
+    
     var validator = FieldValidator()
     private var isEmailValid: Bool = true
     private var isPassValid: Bool = true
@@ -31,35 +34,35 @@ class LoginViewModel: ObservableObject {
     private var fails: Int = 0
     private var timeRemaining = 0
     private var timer: Timer?
-   
-     func mainButtonTap() {
+    
+    func mainButtonTap() {
         var isAllValid = true
         
         if isRegistrationMode && !validator.isValidName(username: username) {
             messageText = "Incorrect name"
             isAllValid = false
-                                                                             }
+        }
         
         if !validator.isValidEmail(email: email) {
             if isAllValid {
                 messageText = "Incorrect email"
                 isAllValid = false
-                          }
-                                                 }
+            }
+        }
         
         if !validator.isValidPass(password: password) {
             if isAllValid {
                 messageText = "Incorrect password"
                 isAllValid = false
             }
-                                                       }
+        }
         
         if isRegistrationMode == true && password != passwordCheck {
             if isAllValid {
                 messageText = "Passwords must be equal"
                 isAllValid = false
             }
-                                                                    }
+        }
         
         if isAllValid {
             messageText = ""
@@ -73,35 +76,33 @@ class LoginViewModel: ObservableObject {
     func syncTryLogReg() {
         Task(priority: .high) {
             if isRegistrationMode {
-                try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
                     try await LoginManager.shared.tryRegister(username: username, email: email, password: password)
-                    try await Task.sleep(nanoseconds: 4_000_000_000)
                     DispatchQueue.main.async {
                         RootViewModel.shared.rootScreen = .tabBar
                     }
                 } catch {
-                    print("Error found")
                     await handleErrors(error: error)
                 }
-                                  } else {
-                try await Task.sleep(nanoseconds: 1_000_000_000)
+            } else {
                 do {
                     try await LoginManager.shared.tryLogin(email: email, password: password)
-                    print("Trying login")
-                    try await Task.sleep(nanoseconds: 4_000_000_000)
                     DispatchQueue.main.async {
-                    RootViewModel.shared.rootScreen = .tabBar
+                        RootViewModel.shared.rootScreen = .tabBar
                     }
                 } catch {
-                    print("Error found")
                     await handleErrors(error: error)
-                        }
+                    
+                }
             }
         }
     }
     func toggleSheet() {
         isShowingSheet.toggle()
+    }
+    
+    func toggleTotp() {
+        isTotpMissed.toggle()
     }
     
     func toggleRegistrationMode() {
@@ -149,10 +150,12 @@ class LoginViewModel: ObservableObject {
         return
     }
     func handleErrors(error: Error) async {
-        print("HANDLING ERRORS....")
         switch error as? LoginError {
         case .totpMissed:
             print("totpMissed")
+            DispatchQueue.main.async {
+                self.isTotpMissed.toggle()
+            }
         case .totpInvalid:
             print("totpInvalid")
         case .emailNotVerified:

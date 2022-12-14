@@ -10,13 +10,14 @@ import Alamofire
 
 class UserApiManager: ObservableObject {
     
+    var baseUrl: String = "https://majordom.parker-programs.com/api/user"
     func getUser() async throws -> User? {
         
         guard let accessToken = TokenManager.shared.accessToken
         else {return nil}
         var headers = HTTPHeaders()
         headers.add(.authorization(bearerToken: accessToken))
-        let request = AF.request("https://home.parker-programs.com/api/user",
+        let request = AF.request("\(baseUrl)",
                                  headers: headers)
         do {
             let user = try await request.serializingDecodable(User.self).value
@@ -33,7 +34,7 @@ class UserApiManager: ObservableObject {
             "username": email,
             "password": password
         ]
-        let request = AF.request("https://home.parker-programs.com/api/user/login",
+        let request = AF.request("\(baseUrl)/login",
                                  method: .post,
                                  parameters: parameters,
                                  encoder: .urlEncodedForm)
@@ -54,7 +55,7 @@ class UserApiManager: ObservableObject {
         ]
         
         do {
-            return try await AF.request("https://home.parker-programs.com/api/user/register",
+            return try await AF.request("\(baseUrl)/register",
                                         method: .post,
                                         parameters: parameters,
                                         encoder: .urlEncodedForm).validate().serializingDecodable(TokensPair.self).value
@@ -76,7 +77,7 @@ class UserApiManager: ObservableObject {
         guard TokenManager.shared.isAlive(token: refreshToken) else {return LoginManager.shared.logOut()}
         let parameters: [String: String] = ["refresh_token": refreshToken]
         do {
-            let tokens = try await AF.request("https://home.parker-programs.com/api/user/refresh", method: .post, parameters: parameters, encoder: .urlEncodedForm).validate().serializingDecodable(TokensPair.self).value
+            let tokens = try await AF.request("\(baseUrl) + /refresh", method: .post, parameters: parameters, encoder: .urlEncodedForm).validate().serializingDecodable(TokensPair.self).value
             TokenManager.shared.refreshToken = tokens.refreshToken
             TokenManager.shared.accessToken = tokens.accessToken
         } catch {
@@ -92,7 +93,7 @@ class UserApiManager: ObservableObject {
         var headers = HTTPHeaders()
         headers.add(.authorization(bearerToken: accessToken))
         do {
-            _ = try await AF.request("https://home.parker-programs.com/api/user",
+            _ = try await AF.request("\(baseUrl)",
                                      method: .delete,
                                      headers: headers).validate().serializingData().value
             LoginManager.shared.logOut()
