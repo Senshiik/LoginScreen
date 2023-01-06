@@ -50,9 +50,9 @@ class LoginManager: ObservableObject {
         }
     }
     
-    func tryLogin(email: String, password: String) async throws {
-        
-        let tokens = try await UserApiManager().requestLogin(email: email, password: password)
+    func tryLogin(email: String, password: String, code: String?) async throws {
+        print(#function, code)
+        let tokens = try await UserApiManager().requestLogin(email: email, password: password, code: code)
         print("Tokens")
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)

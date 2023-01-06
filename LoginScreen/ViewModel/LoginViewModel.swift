@@ -12,7 +12,9 @@ import Alamofire
 class LoginViewModel: ObservableObject, TotpViewModelDelegate {
     
     func didEnterCode(code: String) {
-        print("code is \(code)")
+        isTotpMissed = false
+        syncTryLogReg(code: code)
+        print("delegate", code)
     }
     
     @Published public var isRegistrationMode: Bool = false
@@ -40,7 +42,7 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
         
         if isRegistrationMode && !validator.isValidName(username: username) {
             messageText = "Incorrect name"
-            isAllValid = false
+            isAllValid = false  
         }
         
         if !validator.isValidEmail(email: email) {
@@ -73,7 +75,8 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
             messageText = ""
         }
     }
-    func syncTryLogReg() {
+    func syncTryLogReg(code: String? = nil) {
+        print(#function, code)
         Task(priority: .high) {
             if isRegistrationMode {
                 do {
@@ -86,7 +89,7 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
                 }
             } else {
                 do {
-                    try await LoginManager.shared.tryLogin(email: email, password: password)
+                    try await LoginManager.shared.tryLogin(email: email, password: password, code: code)
                     DispatchQueue.main.async {
                         RootViewModel.shared.rootScreen = .tabBar
                     }
@@ -152,7 +155,6 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
     func handleErrors(error: Error) async {
         switch error as? LoginError {
         case .totpMissed:
-            print("totpMissed")
             DispatchQueue.main.async {
                 self.isTotpMissed.toggle()
             }

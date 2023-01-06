@@ -44,16 +44,13 @@ struct LoginView: View {
         }
         .sheet(isPresented: $model.isTotpMissed) {
             TotpTextFieldView(model: TotpViewModel(delegate: model))
-            Button("Submit", role: .cancel, action: model.syncTryLogReg)
         }
         .alert("Forgot password?", isPresented: $model.isAlertPresented) {
             Button("Try again", role: .cancel) {}
             Button("reset the password", action: model.toggleSheet)
-                
         }
     }
 }
-
 // MARK: - Subviews
 
 extension LoginView {
@@ -169,7 +166,6 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             LoginView(model: LoginViewModel())
-                .preferredColorScheme(.dark)
         }
     }
 }

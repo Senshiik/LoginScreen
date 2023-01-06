@@ -11,9 +11,8 @@ public struct TotpTextFieldView: View {
     var label = "Enter The One Time Password"
     
     @StateObject var model: TotpViewModel
-    @State var pin: String = ""
+
     @State var showPin = true
-    weak var delegate: TotpViewModelDelegate?
     public var body: some View {
         VStack(spacing: 16) {
             Text(label).font(.title)
@@ -37,34 +36,19 @@ public struct TotpTextFieldView: View {
     }
     
     private var backgroundField: some View {
-        let boundPin = Binding<String>(get: { self.pin }, set: { newValue in
-            self.pin = newValue
-            if pin.count == 6 {
-                model.delegate?.didEnterCode(code: pin)
-                return
-            }
-            self.submitPin()
-        })
-        return TextField("", text: boundPin, onCommit: submitPin)
+        TextField("", text: $model.code)
            .accentColor(.clear)
            .foregroundColor(.clear)
            .keyboardType(.numberPad)
     }
     
-    private func submitPin() {
-        guard !pin.isEmpty else {
-            showPin = true
-            return
-        }
-    }
-    
     private func getImageName(at index: Int) -> String {
-        if index >= self.pin.count {
+        if index >= self.model.code.count {
             return "circle"
         }
         
         if self.showPin {
-            return self.pin.digits[index].numberString + ".circle"
+            return self.model.code.digits[index].numberString + ".circle"
         }
         
         return "circle.fill"

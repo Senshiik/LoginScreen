@@ -13,11 +13,11 @@ struct LoginScreenApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-//            .onAppear(perform: {
-//                NetworkActivityLogger.shared.startLogging()
-//                NetworkActivityLogger.shared.level = .debug
+            .onAppear(perform: {
+                NetworkActivityLogger.shared.startLogging()
+                NetworkActivityLogger.shared.level = .debug
                 
-            //})
+             })
         }
     }
 }

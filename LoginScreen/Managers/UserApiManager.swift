@@ -28,12 +28,17 @@ class UserApiManager: ObservableObject {
         return nil
     }
     
-    func requestLogin(email: String, password: String) async throws -> TokensPair? {
+    func requestLogin(email: String, password: String, code: String? = nil) async throws -> TokensPair? {
         
-        let parameters: [String: String] = [
+        var parameters: [String: String] = [
             "username": email,
             "password": password
         ]
+        
+        if let code {
+            parameters["totp"] = code
+        }
+        
         let request = AF.request("\(baseUrl)/login",
                                  method: .post,
                                  parameters: parameters,
