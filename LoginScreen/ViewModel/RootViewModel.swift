@@ -15,7 +15,7 @@ class RootViewModel: ObservableObject {
 
         if TokenManager.shared.isLoggedIn() {
             Task {
-                await UserApiManager().refresh()
+                try await UserApiManager().refreshIfNeeded()
             }
             rootScreen = .tabBar
         } else {
@@ -26,7 +26,6 @@ class RootViewModel: ObservableObject {
     enum Screen {
         case tabBar
         case login
-        case fullScreenCover
     }
     
     @Published var rootScreen: Screen = .login

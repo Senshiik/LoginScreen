@@ -42,6 +42,7 @@ struct LoginView: View {
         .sheet(isPresented: $model.isShowingSheet) {
             SafariView(url: URL(string: "https://support.google.com/accounts/answer/41078?hl=en&co=GENIE.Platform%3DAndroid")!)
         }
+        
         .sheet(isPresented: $model.isTotpMissed) {
             TotpTextFieldView(model: TotpViewModel(delegate: model))
         }
@@ -96,6 +97,7 @@ extension LoginView {
         PrimaryTextField(isSecure: false,
                          text: $model.email,
                          title: "Type your email here...")
+        .textContentType(.username)
         .overlay(alignment: .trailing, content: {
             Button(action: {
                 self.model.email = ""}) {
@@ -113,6 +115,7 @@ extension LoginView {
             text: $model.password,
             title: "Type your password here..."
         )
+        .textContentType(.password)
         .overlay(alignment: .trailing, content: {
             Button(action: {
                 self.model.password = ""}) {

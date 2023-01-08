@@ -19,46 +19,19 @@ class LoginManager: ObservableObject {
     }
     func tryRegister(username: String, email: String, password: String) async throws {
         
-        let tokens = await UserApiManager().requestRegister(email: email, password: password)
-        if  let tokens = tokens {
-            TokenManager.shared.saveTokens(tokens: tokens)
-        } else {
-            logOut()
-            return
-        }
-        print("TOKENS", tokens?.accessToken as Any)
-        DispatchQueue.main.async {
-        RootViewModel.shared.rootScreen = .fullScreenCover
-        }
-        let attributes: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: username,
-            kSecValueData as String: password
-        ]
-        
-        if SecItemAdd(attributes as CFDictionary, nil) == noErr {
-            print("User saved successfully in the keychain")
-        } else {
-            print("Something went wrong trying to save the user in the keychain")
-        }
-        
-        currentUser = try await UserApiManager().getUser()
-        print(currentUser?.email as Any)
-        DispatchQueue.main.async {
-        RootViewModel.shared.rootScreen = .fullScreenCover
-            
-        }
+        _ = try await UserApiManager().requestRegister(email: email, password: password)
+        NotificationCenter.default.post(name: .showOnBoarding, object: nil)
     }
     
     func tryLogin(email: String, password: String, code: String?) async throws {
-        print(#function, code)
+        print(#function, code as Any)
         let tokens = try await UserApiManager().requestLogin(email: email, password: password, code: code)
         print("Tokens")
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)
             currentUser = try await UserApiManager().getUser()
-            DispatchQueue.main.async {
-            RootViewModel.shared.rootScreen = .fullScreenCover
+            if currentUser?.isEmailVerified == false {
+                NotificationCenter.default.post(name: .showOnBoarding, object: nil)
             }
         }
         
@@ -75,7 +48,7 @@ class LoginManager: ObservableObject {
     
     func delete() {
         Task {
-        await UserApiManager().deleteUser()
+        try await UserApiManager().deleteUser()
         }
     }
 }

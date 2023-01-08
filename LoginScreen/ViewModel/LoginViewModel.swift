@@ -34,7 +34,7 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
     private var isPassValid: Bool = true
     private var isPassEquals: Bool = true
     private var fails: Int = 0
-    private var timeRemaining = 0
+    private var timeRemaining: Int = 0
     private var timer: Timer?
     
     func mainButtonTap() {
@@ -76,7 +76,6 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
         }
     }
     func syncTryLogReg(code: String? = nil) {
-        print(#function, code)
         Task(priority: .high) {
             if isRegistrationMode {
                 do {
@@ -86,6 +85,7 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
                     }
                 } catch {
                     await handleErrors(error: error)
+                    LoginManager.shared.logOut()
                 }
             } else {
                 do {
@@ -170,6 +170,8 @@ class LoginViewModel: ObservableObject, TotpViewModelDelegate {
             print("Invalid token")
         case .unexpectedError:
             print("Unexpected error")
+        case .some(.alreadyExists):
+            print("User already exists")
         }
     }
 }

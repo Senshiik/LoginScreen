@@ -18,6 +18,7 @@ enum LoginError: Error {
     case tokenExpired
     case invalidToken
     case unexpectedError
+    case alreadyExists
 }
 
 struct ApiExceptionBody: Decodable {

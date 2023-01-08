@@ -28,7 +28,7 @@ struct PrimaryTextField: View {
                 .frame(height: 55)
                 .background(Color("silver"))
                 .font(.title2)
-            .cornerRadius(10)
+                .cornerRadius(10)
             
         }
     }
