@@ -24,9 +24,11 @@ struct LoginView: View {
             if model.isRegistrationMode {
                 secondPasswordField
             }
+            
             Text(model.messageText)
                 .padding(16)
                 .foregroundColor(.salmon)
+            
             Spacer()
             
             mainButton
@@ -34,7 +36,6 @@ struct LoginView: View {
             
             forgotPassButton
             toggleModeButton
-            
         }
         .padding()
         .background(Color.background.ignoresSafeArea())
@@ -79,7 +80,9 @@ extension LoginView {
         nameLabel
         PrimaryTextField(isSecure: false,
                          text: $model.username,
-                         title: "Type your name here")
+                         title: "Type your name here"
+        )
+        .textContentType(.name)
         .overlay(alignment: .trailing, content: {
             Button(action: {
                 self.model.username = ""
@@ -96,7 +99,8 @@ extension LoginView {
         loginLabel
         PrimaryTextField(isSecure: false,
                          text: $model.email,
-                         title: "Type your email here...")
+                         title: "Type your email here..."
+        )
         .textContentType(.username)
         .overlay(alignment: .trailing, content: {
             Button(action: {
@@ -115,7 +119,7 @@ extension LoginView {
             text: $model.password,
             title: "Type your password here..."
         )
-        .textContentType(.password)
+        .textContentType(model.isRegistrationMode ? .oneTimeCode : .password)
         .overlay(alignment: .trailing, content: {
             Button(action: {
                 self.model.password = ""}) {
@@ -132,6 +136,7 @@ extension LoginView {
             text: $model.passwordCheck,
             title: "Type your password again"
         )
+        .textContentType(.oneTimeCode)
         .overlay(alignment: .trailing, content: {
             Button(action: {
                 self.model.passwordCheck = ""}) {

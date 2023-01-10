@@ -9,4 +9,5 @@ import Foundation
 
 extension NSNotification.Name {
     static let showOnBoarding = NSNotification.Name("ShowOnBoarding")
+    static let hideOnBoarding = NSNotification.Name("HideOnBoarding")
 }

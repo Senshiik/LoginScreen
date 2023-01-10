@@ -40,10 +40,9 @@ class LoginManager: ObservableObject {
     
     func logOut() {
         DispatchQueue.main.async {
-        RootViewModel.shared.rootScreen = .login
+            RootViewModel.shared.rootScreen = .login
         }
-        TokenManager.shared.accessToken = nil
-        TokenManager.shared.refreshToken = nil
+        TokenManager.shared.cleanTokens()
     }
     
     func delete() {

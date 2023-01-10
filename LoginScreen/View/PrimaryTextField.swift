@@ -14,22 +14,23 @@ struct PrimaryTextField: View {
     public var title: String
     
     var body: some View {
-        HStack {
-            Group {
-                if isSecure {
-                    SecureField(title, text: $text)
-                } else {
-                    TextField(title, text: $text)
-                }
-            }
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
-                .padding()
-                .frame(height: 55)
-                .background(Color("silver"))
-                .font(.title2)
-                .cornerRadius(10)
-            
+        textField
+            .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
+            .padding()
+            .frame(height: 55)
+            .background(Color("silver"))
+            .font(.title2)
+            .cornerRadius(10)
+    }
+    
+    @ViewBuilder
+    private var textField: some View {
+        if isSecure {
+            SecureField(title, text: $text)
+                .foregroundColor(Color.black)
+        } else {
+            TextField(title, text: $text)
         }
     }
 }

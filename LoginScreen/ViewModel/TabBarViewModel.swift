@@ -13,9 +13,13 @@ class TabBarViewModel: ObservableObject {
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(showOnBoarding), name: .showOnBoarding, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideOnBoarding), name: .hideOnBoarding, object: nil)
     }
     
     @objc func showOnBoarding() {
         isOnBoarding = true
+    }
+    @objc func hideOnBoarding() {
+        isOnBoarding = false
     }
 }

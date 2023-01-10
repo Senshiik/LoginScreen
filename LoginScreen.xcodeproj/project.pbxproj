@@ -32,6 +32,8 @@
 		6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6283772E289C5B570088F226 /* PrimaryButton.swift */; };
 		6287525F290883BD0082C419 /* UserApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6287525E290883BD0082C419 /* UserApiManager.swift */; };
 		628752622908843D0082C419 /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 628752612908843D0082C419 /* AlamofireNetworkActivityLogger */; };
+		6294FF4F296C4651005CFC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6294FF4E296C4651005CFC71 /* AppDelegate.swift */; };
+		6294FF53296C6AA5005CFC71 /* LoginScreenAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6294FF52296C6AA5005CFC71 /* LoginScreenAppModel.swift */; };
 		62988E9E29267FD900C01D26 /* ApiErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62988E9D29267FD900C01D26 /* ApiErrorsHandler.swift */; };
 		629B04BE29471BE80097C72E /* TotpTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629B04BD29471BE80097C72E /* TotpTextFieldView.swift */; };
 		629B04C029471C820097C72E /* TotpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629B04BF29471C820097C72E /* TotpViewModel.swift */; };
@@ -77,6 +79,7 @@
 		6248FAC8296B087B00FDF0AE /* OnBoardingNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingNotification.swift; sourceTree = "<group>"; };
 		6248FACA296B10DA00FDF0AE /* JSONDecoder.DateDecodingStrategy+iso8601withFractionalSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder.DateDecodingStrategy+iso8601withFractionalSeconds.swift"; sourceTree = "<group>"; };
 		6248FACC296B111600FDF0AE /* Formatter+iso8601withFractionalSeconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+iso8601withFractionalSeconds.swift"; sourceTree = "<group>"; };
+		6248FACE296B271000FDF0AE /* LoginScreen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoginScreen.entitlements; sourceTree = "<group>"; };
 		625C949D28EDAFE800DFAE16 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		625D55A028E84B5E00575248 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		625D55A228E84B6D00575248 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 		62837721289C586C0088F226 /* LoginScreenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6283772E289C5B570088F226 /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		6287525E290883BD0082C419 /* UserApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApiManager.swift; sourceTree = "<group>"; };
+		6294FF4E296C4651005CFC71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6294FF52296C6AA5005CFC71 /* LoginScreenAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenAppModel.swift; sourceTree = "<group>"; };
 		62988E9D29267FD900C01D26 /* ApiErrorsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorsHandler.swift; sourceTree = "<group>"; };
 		629B04BD29471BE80097C72E /* TotpTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotpTextFieldView.swift; sourceTree = "<group>"; };
 		629B04BF29471C820097C72E /* TotpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotpViewModel.swift; sourceTree = "<group>"; };
@@ -161,6 +166,7 @@
 			children = (
 				620FC7EB290EE19F006018C2 /* ApiModels */,
 				625C949D28EDAFE800DFAE16 /* User.swift */,
+				6294FF52296C6AA5005CFC71 /* LoginScreenAppModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,11 +196,13 @@
 		62837703289C58690088F226 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
+				6248FACE296B271000FDF0AE /* LoginScreen.entitlements */,
 				8B5A482428BD5007003C42E4 /* Extensions */,
 				62B8974E28B68A5D00F0E6D4 /* Managers */,
 				620E9725289ED9DE005D812E /* ViewModel */,
 				62837732289C5C2C0088F226 /* View */,
 				62837704289C58690088F226 /* LoginScreenApp.swift */,
+				6294FF4E296C4651005CFC71 /* AppDelegate.swift */,
 				62837708289C586C0088F226 /* Assets.xcassets */,
 				6283770A289C586C0088F226 /* Preview Content */,
 			);
@@ -432,8 +440,10 @@
 				620E9727289ED9F8005D812E /* LoginViewModel.swift in Sources */,
 				6283772F289C5B570088F226 /* PrimaryButton.swift in Sources */,
 				8B5A482628BD501B003C42E4 /* ColorExtension.swift in Sources */,
+				6294FF53296C6AA5005CFC71 /* LoginScreenAppModel.swift in Sources */,
 				629B04C029471C820097C72E /* TotpViewModel.swift in Sources */,
 				62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */,
+				6294FF4F296C4651005CFC71 /* AppDelegate.swift in Sources */,
 				62988E9E29267FD900C01D26 /* ApiErrorsHandler.swift in Sources */,
 				6248FACB296B10DA00FDF0AE /* JSONDecoder.DateDecodingStrategy+iso8601withFractionalSeconds.swift in Sources */,
 				62AF817728FFDC1E00AD4CBB /* SettingsView.swift in Sources */,
@@ -612,11 +622,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LoginScreen/LoginScreen.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LoginScreen/Preview Content\"";
-				DEVELOPMENT_TEAM = GQAPHD98UK;
+				DEVELOPMENT_TEAM = 6BLS568MFQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -629,7 +640,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.domkin.LoginScreen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Senshiik.LoginScreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -643,11 +654,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LoginScreen/LoginScreen.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LoginScreen/Preview Content\"";
-				DEVELOPMENT_TEAM = GQAPHD98UK;
+				DEVELOPMENT_TEAM = 6BLS568MFQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -660,7 +672,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.domkin.LoginScreen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Senshiik.LoginScreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -24,9 +24,11 @@ struct TabBarView: View {
         }
         .fullScreenCover(isPresented: $model.isOnBoarding) {
             OnBoardingView(model: OnBoardingViewModel())
-                .onAppear {
-                    NotificationCenter.default.post(name: .showOnBoarding, object: nil)
-                }
+        }
+        .onAppear {
+            Task {
+                try await UserApiManager().getUser()
+            }
         }
     }
 }

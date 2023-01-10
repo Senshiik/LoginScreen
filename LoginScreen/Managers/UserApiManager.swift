@@ -24,16 +24,30 @@ class UserApiManager: ObservableObject {
         do {
             let user = try await request.serializingDecodable(User.self, decoder: decoder).value
             if !user.isEmailVerified {
-                try await resendVerification()
-            }
+                NotificationCenter.default.post(name: .showOnBoarding, object: nil)            }
             return user
         } catch {
-            print(error)
             try await apiErrorHandler(request: request)
         }
         return nil
     }
     
+    func verifyEmail(token: String) async throws {
+        try await refreshIfNeeded()
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
+        let request = AF.request("\(baseUrl)/verify/\(token)", method: .post)
+                                 
+        do {
+            let tokens = try await request.validate().serializingDecodable(TokensPair.self).value
+            TokenManager.shared.saveTokens(tokens: tokens)
+            NotificationCenter.default.post(name: .hideOnBoarding, object: nil)
+            return
+        } catch {
+            try await apiErrorHandler(request: request)
+        }
+    }
+
     func resendVerification() async throws {
         try await refreshIfNeeded()
 
@@ -72,7 +86,7 @@ class UserApiManager: ObservableObject {
         do {
             let tokens = try await request.serializingDecodable(TokensPair.self).value
             return tokens
-        } catch {
+            } catch {
             try await apiErrorHandler(request: request)
         }
         return nil

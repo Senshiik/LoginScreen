@@ -16,19 +16,21 @@ class TokenManager: ObservableObject {
     static let shared = TokenManager()
     
     private init() {
-        
         accessToken = UserDefaults.standard.string(forKey: "access_token")
         refreshToken = UserDefaults.standard.string(forKey: "refresh_token")
-        
     }
     
     public func saveTokens(tokens: TokensPair) {
-        
         accessToken = tokens.accessToken
         refreshToken = tokens.refreshToken
         UserDefaults.standard.set(tokens.accessToken, forKey: "access_token")
         UserDefaults.standard.set(tokens.refreshToken, forKey: "refresh_token")
-        
+    }
+    
+    public func cleanTokens() {
+    
+        UserDefaults.standard.set(nil, forKey: "access_token")
+        UserDefaults.standard.set(nil, forKey: "refresh_token")
     }
     
     public func isLoggedIn() -> Bool {
