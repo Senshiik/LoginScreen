@@ -7,143 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2626F8C7-CB57-42FB-8E5E-1F81E20ECC70"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LoginScreen/Managers/UserApiManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "resendVerification()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2626F8C7-CB57-42FB-8E5E-1F81E20ECC70 - f092e5c5570d87c2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LoginScreen.UserApiManager.resendVerification() async throws -&gt; ()"
-                  moduleName = "LoginScreen"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondemkin/Desktop/LoginScreen/LoginScreen/Managers/UserApiManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "2626F8C7-CB57-42FB-8E5E-1F81E20ECC70 - e2055a2c77821abd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) await resume partial function for LoginScreen.UserApiManager.resendVerification() async throws -&gt; ()"
-                  moduleName = "LoginScreen"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondemkin/Desktop/LoginScreen/LoginScreen/Managers/UserApiManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5F0806FC-94F7-46CF-9AD2-415608D50ABC"
+            uuid = "5906151C-CE46-4F23-B5AC-745975F924E4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LoginScreen/Managers/UserApiManager.swift"
+            filePath = "LoginScreen/Home/HomeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "verifyEmail(token:)"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "refresh()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4FAA8245-1FBB-45F9-905E-DA3A91988D1B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LoginScreen/Managers/UserApiManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "verifyEmail(token:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4FAA8245-1FBB-45F9-905E-DA3A91988D1B - 7eb9776e93ef75f8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for LoginScreen.UserApiManager.verifyEmail(token: Swift.String) async throws -&gt; ()"
-                  moduleName = "LoginScreen"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondemkin/Desktop/LoginScreen/LoginScreen/Managers/UserApiManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  uuid = "4FAA8245-1FBB-45F9-905E-DA3A91988D1B - d6293455cebc17f9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for LoginScreen.UserApiManager.verifyEmail(token: Swift.String) async throws -&gt; ()"
-                  moduleName = "LoginScreen"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondemkin/Desktop/LoginScreen/LoginScreen/Managers/UserApiManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "184">
-               </Location>
-               <Location
-                  uuid = "4FAA8245-1FBB-45F9-905E-DA3A91988D1B - 2e5ba8051645994"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) await resume partial function for LoginScreen.UserApiManager.verifyEmail(token: Swift.String) async throws -&gt; ()"
-                  moduleName = "LoginScreen"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondemkin/Desktop/LoginScreen/LoginScreen/Managers/UserApiManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "4FAA8245-1FBB-45F9-905E-DA3A91988D1B - 4ceafa36be553f7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(8) suspend resume partial function for LoginScreen.UserApiManager.verifyEmail(token: Swift.String) async throws -&gt; ()"
-                  moduleName = "LoginScreen"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondemkin/Desktop/LoginScreen/LoginScreen/Managers/UserApiManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

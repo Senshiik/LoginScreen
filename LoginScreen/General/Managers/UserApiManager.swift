@@ -24,10 +24,14 @@ class UserApiManager: ObservableObject {
         do {
             let user = try await request.serializingDecodable(User.self, decoder: decoder).value
             if !user.isEmailVerified {
-                NotificationCenter.default.post(name: .showOnBoarding, object: nil)            }
+                NotificationCenter.default.post(name: .showOnBoarding, object: nil)
+            }
+            print("USER IN GETUSER:", user.name as Any)
             return user
         } catch {
+            print(#file, #line, #function, error)
             try await apiErrorHandler(request: request)
+            
         }
         return nil
     }
@@ -159,7 +163,7 @@ class UserApiManager: ObservableObject {
             errorDetail = try await request.serializingDecodable(ApiExceptionBody.self, decoder: decoder).value
          } catch {
              print("Exception parsing error: \(error)")
-             return
+            return
          }
         switch errorDetail.detail.type {
         case.alreadyExists:

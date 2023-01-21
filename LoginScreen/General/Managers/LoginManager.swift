@@ -12,7 +12,7 @@ import Alamofire
 
 class LoginManager: ObservableObject {
     
-    var currentUser: User?
+    var currentUser: ObservableUser = .init(User())
     static let shared = LoginManager()
     private init() {
         
@@ -29,13 +29,32 @@ class LoginManager: ObservableObject {
         print("Tokens")
         if  let tokens = tokens {
             TokenManager.shared.saveTokens(tokens: tokens)
-            currentUser = try await UserApiManager().getUser()
-            if currentUser?.isEmailVerified == false {
+            try await tryGetUser()
+            print(currentUser.name as Any, "Name Login")
+            if currentUser.isEmailVerified == false {
                 NotificationCenter.default.post(name: .showOnBoarding, object: nil)
             }
         }
-        
         return
+    }
+    
+    func tryGetUser() async throws {
+        if let user = try await UserApiManager().getUser() {
+            DispatchQueue.main.async {
+                self.currentUser.name = user.name
+                self.currentUser.email = user.email
+                self.currentUser.username = user.username
+                self.currentUser.name = user.name
+                self.currentUser.lang = user.lang
+                self.currentUser.country = user.country
+                self.currentUser.birthdate = user.birthdate
+                self.currentUser.id = user.id
+                self.currentUser.isEmailVerified = user.isEmailVerified
+                self.currentUser.is2faEnabled = user.is2faEnabled
+                self.currentUser.registrationDate = user.registrationDate
+            }
+            print("Current user is: \(String(describing: currentUser.name))")
+        }
     }
     
     func logOut() {
@@ -47,7 +66,7 @@ class LoginManager: ObservableObject {
     
     func delete() {
         Task {
-        try await UserApiManager().deleteUser()
+            try await UserApiManager().deleteUser()
         }
     }
 }

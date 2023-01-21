@@ -10,10 +10,12 @@ import SwiftUI
 struct TabBarView: View {
     
     @ObservedObject public var model: TabBarViewModel
+    @ObservedObject public var loginManager = LoginManager.shared
     
     var body: some View {
         TabView {
-            HomeView(homeViewModel: HomeViewModel())
+            let model = HomeViewModel(user: loginManager.currentUser)
+                HomeView(model: model, user: model.user)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
@@ -28,10 +30,10 @@ struct TabBarView: View {
         .onAppear {
             Task {
                 try await UserApiManager().getUser()
+                }
             }
         }
     }
-}
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {

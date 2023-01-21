@@ -12,7 +12,6 @@
 		620FC7ED290EE216006018C2 /* TokensPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620FC7EC290EE216006018C2 /* TokensPair.swift */; };
 		62278E2628FC6279007D7DCE /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62278E2528FC6279007D7DCE /* TabBarView.swift */; };
 		622B0CBB28F7F2D700D91143 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */; };
-		622B0CBD28F7F6E600D91143 /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */; };
 		6248FAC3296A11D600FDF0AE /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248FAC2296A11D600FDF0AE /* OnBoardingView.swift */; };
 		6248FAC5296A11E600FDF0AE /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248FAC4296A11E600FDF0AE /* OnBoardingViewModel.swift */; };
 		6248FAC7296A428400FDF0AE /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248FAC6296A428400FDF0AE /* TabBarViewModel.swift */; };
@@ -37,6 +36,7 @@
 		62988E9E29267FD900C01D26 /* ApiErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62988E9D29267FD900C01D26 /* ApiErrorsHandler.swift */; };
 		629B04BE29471BE80097C72E /* TotpTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629B04BD29471BE80097C72E /* TotpTextFieldView.swift */; };
 		629B04C029471C820097C72E /* TotpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629B04BF29471C820097C72E /* TotpViewModel.swift */; };
+		62A726EA296D9AA8000557E2 /* ObservableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A726E9296D9AA8000557E2 /* ObservableUser.swift */; };
 		62AF817728FFDC1E00AD4CBB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817628FFDC1E00AD4CBB /* SettingsView.swift */; };
 		62AF817928FFDD1000AD4CBB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */; };
 		62AF819B2901506700AD4CBB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 62AF819A2901506700AD4CBB /* Alamofire */; };
@@ -72,7 +72,6 @@
 		620FC7EC290EE216006018C2 /* TokensPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensPair.swift; sourceTree = "<group>"; };
 		62278E2528FC6279007D7DCE /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
 		6248FAC2296A11D600FDF0AE /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		6248FAC4296A11E600FDF0AE /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		6248FAC6296A428400FDF0AE /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		62988E9D29267FD900C01D26 /* ApiErrorsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorsHandler.swift; sourceTree = "<group>"; };
 		629B04BD29471BE80097C72E /* TotpTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotpTextFieldView.swift; sourceTree = "<group>"; };
 		629B04BF29471C820097C72E /* TotpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotpViewModel.swift; sourceTree = "<group>"; };
+		62A726E9296D9AA8000557E2 /* ObservableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableUser.swift; sourceTree = "<group>"; };
 		62AF817628FFDC1E00AD4CBB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		62AF81D82901A0AE00AD4CBB /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
@@ -138,21 +138,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		620E9725289ED9DE005D812E /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				620E9726289ED9F8005D812E /* LoginViewModel.swift */,
-				62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */,
-				622B0CBC28F7F6E500D91143 /* ErrorViewModel.swift */,
-				629B04BF29471C820097C72E /* TotpViewModel.swift */,
-				6248FAC6296A428400FDF0AE /* TabBarViewModel.swift */,
-				6248FAC4296A11E600FDF0AE /* OnBoardingViewModel.swift */,
-				622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */,
-				625D55A228E84B6D00575248 /* RootViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		620FC7EB290EE19F006018C2 /* ApiModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,20 +146,92 @@
 			path = ApiModels;
 			sourceTree = "<group>";
 		};
-		625C949C28EDAFB700DFAE16 /* Model */ = {
+		625C949C28EDAFB700DFAE16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				620FC7EB290EE19F006018C2 /* ApiModels */,
 				625C949D28EDAFE800DFAE16 /* User.swift */,
+				62A726E9296D9AA8000557E2 /* ObservableUser.swift */,
 				6294FF52296C6AA5005CFC71 /* LoginScreenAppModel.swift */,
 			);
-			path = Model;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		627553E72976F33E00BFD5A9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				620E9726289ED9F8005D812E /* LoginViewModel.swift */,
+				620E9723289DA409005D812E /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		627553E82976F39C00BFD5A9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				62AF817828FFDD1000AD4CBB /* SettingsViewModel.swift */,
+				62AF817628FFDC1E00AD4CBB /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		627553E92976F3B100BFD5A9 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6248FAC6296A428400FDF0AE /* TabBarViewModel.swift */,
+				62278E2528FC6279007D7DCE /* TabBarView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		627553EA2976F3B400BFD5A9 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				625D55A228E84B6D00575248 /* RootViewModel.swift */,
+				625D55A028E84B5E00575248 /* RootView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		627553EB2976F3B700BFD5A9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				622B0CBA28F7F2D700D91143 /* HomeViewModel.swift */,
+				625D55A428E8906A00575248 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		627553EC2976F42500BFD5A9 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				8B5A482428BD5007003C42E4 /* Extensions */,
+				62B8974E28B68A5D00F0E6D4 /* Managers */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		627553ED2976F45A00BFD5A9 /* Totp */ = {
+			isa = PBXGroup;
+			children = (
+				629B04BF29471C820097C72E /* TotpViewModel.swift */,
+				629B04BD29471BE80097C72E /* TotpTextFieldView.swift */,
+			);
+			path = Totp;
+			sourceTree = "<group>";
+		};
+		627553EE2976F46800BFD5A9 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				6248FAC2296A11D600FDF0AE /* OnBoardingView.swift */,
+				6248FAC4296A11E600FDF0AE /* OnBoardingViewModel.swift */,
+			);
+			path = OnBoarding;
 			sourceTree = "<group>";
 		};
 		628376F8289C58690088F226 = {
 			isa = PBXGroup;
 			children = (
-				625C949C28EDAFB700DFAE16 /* Model */,
 				62837703289C58690088F226 /* LoginScreen */,
 				62837714289C586C0088F226 /* LoginScreenTests */,
 				6283771E289C586C0088F226 /* LoginScreenUITests */,
@@ -197,9 +254,15 @@
 			isa = PBXGroup;
 			children = (
 				6248FACE296B271000FDF0AE /* LoginScreen.entitlements */,
-				8B5A482428BD5007003C42E4 /* Extensions */,
-				62B8974E28B68A5D00F0E6D4 /* Managers */,
-				620E9725289ED9DE005D812E /* ViewModel */,
+				627553EC2976F42500BFD5A9 /* General */,
+				625C949C28EDAFB700DFAE16 /* Models */,
+				627553EE2976F46800BFD5A9 /* OnBoarding */,
+				627553ED2976F45A00BFD5A9 /* Totp */,
+				627553EB2976F3B700BFD5A9 /* Home */,
+				627553EA2976F3B400BFD5A9 /* Root */,
+				627553E92976F3B100BFD5A9 /* TabBar */,
+				627553E82976F39C00BFD5A9 /* Settings */,
+				627553E72976F33E00BFD5A9 /* Login */,
 				62837732289C5C2C0088F226 /* View */,
 				62837704289C58690088F226 /* LoginScreenApp.swift */,
 				6294FF4E296C4651005CFC71 /* AppDelegate.swift */,
@@ -238,15 +301,8 @@
 			isa = PBXGroup;
 			children = (
 				6283772E289C5B570088F226 /* PrimaryButton.swift */,
-				62278E2528FC6279007D7DCE /* TabBarView.swift */,
-				6248FAC2296A11D600FDF0AE /* OnBoardingView.swift */,
-				625D55A428E8906A00575248 /* HomeView.swift */,
 				8B5A482228BD4E51003C42E4 /* PrimaryTextField.swift */,
-				629B04BD29471BE80097C72E /* TotpTextFieldView.swift */,
-				62AF817628FFDC1E00AD4CBB /* SettingsView.swift */,
 				62E5D16728AA5863006C1DD4 /* SafariViewController.swift */,
-				620E9723289DA409005D812E /* LoginView.swift */,
-				625D55A028E84B5E00575248 /* RootView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -445,6 +501,7 @@
 				62B8975028B68A7C00F0E6D4 /* LoginManager.swift in Sources */,
 				6294FF4F296C4651005CFC71 /* AppDelegate.swift in Sources */,
 				62988E9E29267FD900C01D26 /* ApiErrorsHandler.swift in Sources */,
+				62A726EA296D9AA8000557E2 /* ObservableUser.swift in Sources */,
 				6248FACB296B10DA00FDF0AE /* JSONDecoder.DateDecodingStrategy+iso8601withFractionalSeconds.swift in Sources */,
 				62AF817728FFDC1E00AD4CBB /* SettingsView.swift in Sources */,
 				62AF817928FFDD1000AD4CBB /* SettingsViewModel.swift in Sources */,
@@ -454,7 +511,6 @@
 				620E9724289DA409005D812E /* LoginView.swift in Sources */,
 				629B04BE29471BE80097C72E /* TotpTextFieldView.swift in Sources */,
 				62837705289C58690088F226 /* LoginScreenApp.swift in Sources */,
-				622B0CBD28F7F6E600D91143 /* ErrorViewModel.swift in Sources */,
 				6248FACD296B111600FDF0AE /* Formatter+iso8601withFractionalSeconds.swift in Sources */,
 				62278E2628FC6279007D7DCE /* TabBarView.swift in Sources */,
 				6248FAC9296B087B00FDF0AE /* OnBoardingNotification.swift in Sources */,
